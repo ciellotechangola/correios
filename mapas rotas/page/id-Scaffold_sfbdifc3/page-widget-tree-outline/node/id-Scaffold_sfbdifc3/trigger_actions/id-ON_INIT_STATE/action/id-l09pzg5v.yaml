@@ -1,0 +1,11 @@
+alertDialog:
+  informationalDialog:
+    title:
+      inputValue: {}
+    message:
+      inputValue:
+        serializedValue: The App Value googleApiKeys is empty
+    dismissText:
+      inputValue:
+        serializedValue: Ok
+key: l09pzg5v

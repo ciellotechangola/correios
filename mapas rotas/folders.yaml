@@ -1,0 +1,6 @@
+rootFolders:
+  - key: k1wsb0ec
+    name: pages
+widgetClassKeyToFolderKey:
+  Scaffold_yu9khkle: k1wsb0ec
+  Scaffold_sfbdifc3: k1wsb0ec

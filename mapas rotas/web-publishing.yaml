@@ -1,0 +1,37 @@
+webSettings:
+  PROD:
+    customHeaders: "<script>\n    (function() {\n        var cors_api_host = 'whispering-citadel-11540-0a9768b9a869.herokuapp.com';\n        var cors_api_url = 'https:\/\/' + cors_api_host + '\/';\n        var slice = [].slice;\n        var origin = window.location.protocol + '\/\/' + window.location.host;\n        var open = XMLHttpRequest.prototype.open;\n        XMLHttpRequest.prototype.open = function() {\n            var args = slice.call(arguments);\n            var targetOrigin = \/^https?:\\\/\\\/([^\\\/]+)\/i.exec(args[1]);\n            if (targetOrigin && targetOrigin[0].toLowerCase() !== origin &&\n                targetOrigin[1] !== cors_api_host) {\n                args[1] = cors_api_url + args[1];\n            }\n            return open.apply(this, args);\n        };\n    })();\n  <\/script>"
+    seoTitle: GoogleMapsRoute
+    subdomain: googlemapsroute
+    showWatermark: false
+    allowToShare: true
+    allowPwa: true
+    statusBarColor:
+      value: "4294046968"
+      darkModeColor:
+        value: "4280099880"
+    orientation: PORTRAIT_PRIMARY
+  v2had5:
+    seoTitle: Drivird
+    subdomain: drivird
+    allowPwa: true
+    statusBarColor:
+      value: "4294046968"
+      darkModeColor:
+        value: "4280099880"
+  qze4de:
+    seoTitle: Drivird
+    subdomain: drivird
+    allowPwa: true
+    statusBarColor:
+      value: "4294046968"
+      darkModeColor:
+        value: "4280099880"
+  04j0lo:
+    seoTitle: Drivird
+    subdomain: drivird
+    allowPwa: true
+    statusBarColor:
+      value: "4294046968"
+      darkModeColor:
+        value: "4280099880"

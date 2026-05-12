@@ -1,0 +1,74 @@
+key: PlacePicker_gvlmoe1h
+type: PlacePicker
+props:
+  placePicker:
+    buttonOptions:
+      text:
+        themeStyle: TITLE_SMALL
+        translationIdentifier:
+          key: fm5docnm
+        textValue:
+          inputValue: Origin ?
+        colorValue:
+          inputValue:
+            themeColor: INFO
+      borderRadius:
+        type: FF_BORDER_RADIUS_ALL
+        allValue:
+          inputValue: 8
+          mostRecentInputValue: 8
+      dimensions:
+        width:
+          pixelsValue:
+            inputValue: 200
+        height:
+          pixelsValue:
+            inputValue: 40
+      elevationValue:
+        inputValue: 0
+        mostRecentInputValue: 0
+      fillColorValue:
+        inputValue:
+          themeColor: PRIMARY
+      borderColorValue:
+        inputValue:
+          value: "0"
+      borderWidthValue:
+        inputValue: 1
+      iconValue:
+        inputValue:
+          sizeValue:
+            inputValue: 16
+          colorValue:
+            inputValue:
+              themeColor: INFO
+          iconDataValue:
+            inputValue:
+              codePoint: 58284
+              family: MaterialIcons
+              matchTextDirection: false
+              name: location_pin
+  themeOverrides:
+    - tagPath:
+        - 45
+        - 1
+        - 36
+        - 1
+        - 6
+        - 1
+    - tagPath:
+        - 45
+        - 1
+        - 27
+    - tagPath:
+        - 45
+        - 1
+        - 1
+        - 26
+        - 1
+name: PlacePickerOrigin
+themeWidgetInfo:
+  identifier:
+    name: PIcker
+    key: qond6d
+  widgetHash: 33172348

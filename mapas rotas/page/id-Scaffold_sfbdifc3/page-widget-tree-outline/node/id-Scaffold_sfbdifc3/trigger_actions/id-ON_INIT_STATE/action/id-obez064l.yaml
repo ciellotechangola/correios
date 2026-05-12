@@ -1,0 +1,8 @@
+localStateUpdate:
+  updates:
+    - fieldIdentifier:
+        key: h59rt
+      clearValue: {}
+  updateType: WIDGET
+  stateVariableType: WIDGET_CLASS_STATE
+key: obez064l

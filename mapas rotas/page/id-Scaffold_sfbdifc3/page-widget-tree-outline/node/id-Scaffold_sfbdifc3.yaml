@@ -1,0 +1,46 @@
+key: Scaffold_sfbdifc3
+type: Scaffold
+props:
+  scaffold:
+    safeArea: true
+    navBarItem:
+      navIcon:
+        sizeValue:
+          inputValue: 24
+        colorValue:
+          inputValue:
+            value: "4288585374"
+        iconDataValue:
+          inputValue:
+            codePoint: 61703
+            family: MaterialIcons
+            matchTextDirection: false
+            name: home_outlined
+      navActiveIcon:
+        sizeValue:
+          inputValue: 24
+        colorValue:
+          inputValue:
+            themeColor: PRIMARY
+        iconDataValue:
+          inputValue:
+            codePoint: 58136
+            family: MaterialIcons
+            matchTextDirection: false
+            name: home
+      show: false
+      differentActiveIcon: false
+      label:
+        translationIdentifier:
+          key: y9g30q4i
+        textValue:
+          inputValue: Home
+    hideKeyboardOnTap: true
+    backgroundColorValue:
+      inputValue:
+        themeColor: PRIMARY_BACKGROUND
+  opacity:
+    opacityValue:
+      inputValue: 1
+    animatedOpacity: {}
+name: HomePage

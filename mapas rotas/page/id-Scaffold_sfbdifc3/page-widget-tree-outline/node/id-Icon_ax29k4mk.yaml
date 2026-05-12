@@ -1,0 +1,15 @@
+key: Icon_ax29k4mk
+type: Icon
+props:
+  icon:
+    sizeValue:
+      inputValue: 24
+    colorValue:
+      inputValue:
+        themeColor: SUCCESS
+    iconDataValue:
+      inputValue:
+        codePoint: 58996
+        family: MaterialIcons
+        matchTextDirection: false
+        name: traffic

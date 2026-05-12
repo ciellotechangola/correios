@@ -1,0 +1,20 @@
+alertDialog:
+  informationalDialog:
+    title:
+      inputValue:
+        serializedValue: Error
+    message:
+      variable:
+        source: ACTION_INPUTS
+        baseVariable:
+          actionInput:
+            actionInput: ACTION_PARAMETER
+            parameterIdentifier:
+              name: message
+              key: h9siir
+        nodeKeyRef:
+          key: Container_h1i726u9
+    dismissText:
+      inputValue:
+        serializedValue: Ok
+key: xfz4ffyv

@@ -1,0 +1,703 @@
+MANTER INFRA ESTRUTURA
+Atue como um engenheiro de software sênior especializado em arquitetura full-stack (backend e frontend).
+
+Contexto:
+Existe uma aplicação já implementada com infraestrutura completa, incluindo backend, frontend, banco de dados, integrações e configurações de deploy.
+
+Objetivo:
+Realizar apenas as alterações solicitadas, preservando integralmente toda a estrutura existente, incluindo:
+
+Arquitetura do sistema
+Padrões de projeto utilizados
+APIs existentes
+Estrutura de pastas
+Banco de dados e suas relações
+Integrações externas
+
+Regras obrigatórias:
+
+NÃO modificar nenhuma parte do sistema que não tenha sido explicitamente solicitada.
+NÃO refatorar código desnecessariamente.
+NÃO alterar nomes de variáveis, funções ou endpoints existentes, exceto quando estritamente necessário para a mudança solicitada.
+Garantir compatibilidade total com o sistema atual.
+Evitar impactos colaterais (regressões).
+Manter padrões de código já utilizados no projeto.
+Caso haja risco de quebra, explicar antes de aplicar a mudança.
+
+Formato da resposta:
+
+Explicação breve da alteração
+Lista dos arquivos afetados
+Código antes e depois (somente trechos modificados)
+Justificativa técnica da abordagem
+Possíveis impactos ou riscos
+
+Solicitação de alteração:
+
+
+
+
+
+🧠 CONTEXTO DO PROJETO
+
+Já existe um sistema funcional com:
+
+Supabase backend com localização em tempo real
+Tabelas de localizacoes_tempo_real
+Funções:
+update_location
+buscar_proximos
+marcar_offline
+Perfis:
+vendedor
+cliente
+Google Maps API já integrado no frontend
+🎯 OBJETIVO FINAL
+
+Transformar o sistema num:
+
+🚗 Marketplace automotivo tipo Uber + iFood híbrido
+📍 Funcionalidades principais:
+👤 PERFIL VENDEDOR
+Ver clientes próximos no mapa em tempo real
+Ver pedidos de clientes próximos
+Filtrar pedidos por distância e status
+Acompanhar cliente até finalização do pedido (tracking live)
+Atualização automática de localização dos clientes
+👤 PERFIL CLIENTE
+Ver lojas/vendedores próximos no mapa
+Selecionar loja
+Criar pedido
+Acompanhar vendedor/loja em tempo real
+Ver trajetória até entrega ou ponto de serviço
+🗺️ GOOGLE MAPS REQUIREMENTS
+📌 1. MARKERS ANIMADOS (OBRIGATÓRIO)
+Usar markers personalizados por perfil:
+cliente = azul
+vendedor = verde
+loja = vermelho
+Animação suave:
+movement interpolation (não “teleportar” marker)
+rotation based on direction (se disponível)
+📌 2. REAL-TIME MOVEMENT
+
+Implementar:
+
+Opção A (preferida)
+Supabase Realtime subscriptions
+Opção B (fallback)
+Timer polling a cada 3–5 segundos
+🔁 Requisitos:
+Atualizar posição sem reload do mapa
+Smooth transition entre posições
+Evitar flickering de markers
+📌 3. CLUSTERING DE PONTOS
+Ativar marker clustering para muitos utilizadores
+Agrupar:
+lojas
+clientes
+vendedores
+Regras:
+zoom out → clusters
+zoom in → individual markers
+📌 4. TRAJETÓRIA / ROUTE SYSTEM
+Para pedidos:
+desenhar rota entre:
+cliente → vendedor (pedido)
+cliente → loja (seleção)
+vendedor → cliente (entrega)
+
+Usar:
+
+Google Directions API
+📌 5. SISTEMA DE PEDIDOS (CORE LOGIC)
+Fluxo:
+Cliente seleciona loja
+Cria pedido no sistema
+Pedido recebe status:
+pending
+accepted
+in_transit
+completed
+Vendedor recebe pedido com:
+localização do cliente
+distância
+rota sugerida
+Tracking em tempo real ativo até finalização
+📌 6. BACKEND INTEGRAÇÃO (SUPABASE)
+
+Usar funções existentes:
+
+update_location() → atualizar posição
+buscar_proximos() → encontrar entidades próximas
+
+Adicionar lógica:
+
+filtrar por perfil
+filtrar por pedido ativo
+retornar apenas users online
+📌 7. UI/UX (TIPO IFOOD + UBER)
+MAPA PRINCIPAL:
+Top bar com pesquisa
+Bottom sheet com:
+lista de lojas ou clientes próximos
+status de pedidos
+botão “centralizar minha posição”
+ANIMAÇÕES:
+markers com fade-in
+movimento suave (lerp interpolation)
+pulso quando novo pedido chega
+📌 8. PERFORMANCE (OBRIGATÓRIO)
+debounce de updates (não spammar API)
+limitar updates a cada 3–5s
+cache de posições
+evitar re-render total do mapa
+📌 9. REGRAS IMPORTANTES
+Nunca recriar mapa do zero a cada update
+Apenas atualizar markers existentes
+Separar lógica:
+data layer (Supabase)
+map layer (Google Maps)
+UI layer (Flutter/Web)
+🧠 RESULTADO ESPERADO
+
+Sistema final deve funcionar assim:
+
+🔵 Cliente:
+abre mapa
+vê lojas próximas
+escolhe loja
+faz pedido
+acompanha entrega em tempo real
+🟢 Vendedor:
+vê clientes próximos
+recebe pedidos ao vivo
+vê rota até cliente
+atualiza entrega em tempo real
+🚀 OBJECTIVO FINAL DO SISTEMA
+
+❯ seja criativo implemtar o solicitado analisa os mapas deixa todos iguais maps pasta, e     
+  depois aplicar Sistema final deve funcionar assim:PERFIS CLIENTE E VENDEDOR.
+
+🔵 Cliente:
+abre mapa
+vê lojas próximas
+escolhe loja
+faz pedido
+acompanha entrega em tempo real
+🟢 Vendedor:
+vê clientes próximos
+recebe pedidos ao vivo
+vê rota até cliente
+atualiza entrega em tempo real
+🚀 OBJECTIVO FINAL DO SISTEMA para vendedor e cliente.faça tudo deixa 
+  funcional mapa real ja tem as apis etc...  
+───────────────────────────────────────────────
+
+✔ Marketplace automotivo em tempo real
+✔ Tracking tipo Uber
+✔ Experiência tipo iFood
+✔ Mapa inteligente com clustering
+✔ Comunicação backend Supabase + Google Maps fluida
+
+SUPASE 
+-- WARNING: This schema is for context only and is not meant to be run.
+-- Table order and constraints may not be valid for execution.
+
+CREATE TABLE public.audit_logs (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  tabela text NOT NULL,
+  registro_id uuid NOT NULL,
+  acao text NOT NULL CHECK (acao = ANY (ARRAY['INSERT'::text, 'UPDATE'::text, 'DELETE'::text])),
+  dados_antigos jsonb,
+  dados_novos jsonb,
+  realizado_por uuid,
+  created_at timestamp with time zone NOT NULL DEFAULT timezone('utc'::text, now()),
+  CONSTRAINT audit_logs_pkey PRIMARY KEY (id),
+  CONSTRAINT audit_logs_realizado_por_fkey FOREIGN KEY (realizado_por) REFERENCES public.usuarios(id)
+);
+CREATE TABLE public.avaliacoes (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  user_id uuid NOT NULL,
+  loja_id uuid NOT NULL,
+  nota integer NOT NULL CHECK (nota >= 1 AND nota <= 5),
+  comentario text,
+  created_at timestamp with time zone NOT NULL DEFAULT timezone('utc'::text, now()),
+  CONSTRAINT avaliacoes_pkey PRIMARY KEY (id),
+  CONSTRAINT avaliacoes_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.usuarios(id),
+  CONSTRAINT avaliacoes_loja_id_fkey FOREIGN KEY (loja_id) REFERENCES public.lojas(id)
+);
+CREATE TABLE public.contactos (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  user_id uuid NOT NULL,
+  contacto_id uuid NOT NULL,
+  nome_tipo text,
+  criado_em timestamp with time zone DEFAULT now(),
+  CONSTRAINT contactos_pkey PRIMARY KEY (id)
+);
+CREATE TABLE public.entregas (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  pedido_id uuid NOT NULL,
+  entregador_id uuid,
+  status text NOT NULL DEFAULT 'AGUARDANDO'::text CHECK (status = ANY (ARRAY['AGUARDANDO'::text, 'A_CAMINHO'::text, 'ENTREGUE'::text, 'FALHOU'::text])),
+  localizacao_atual jsonb,
+  created_at timestamp with time zone NOT NULL DEFAULT timezone('utc'::text, now()),
+  CONSTRAINT entregas_pkey PRIMARY KEY (id),
+  CONSTRAINT entregas_pedido_id_fkey FOREIGN KEY (pedido_id) REFERENCES public.pedidos(id),
+  CONSTRAINT entregas_entregador_id_fkey FOREIGN KEY (entregador_id) REFERENCES public.usuarios(id)
+);
+CREATE TABLE public.favoritos (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  user_id uuid NOT NULL,
+  loja_id uuid,
+  produto_id uuid,
+  created_at timestamp with time zone NOT NULL DEFAULT timezone('utc'::text, now()),
+  CONSTRAINT favoritos_pkey PRIMARY KEY (id),
+  CONSTRAINT favoritos_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.usuarios(id),
+  CONSTRAINT favoritos_loja_id_fkey FOREIGN KEY (loja_id) REFERENCES public.lojas(id),
+  CONSTRAINT favoritos_produto_id_fkey FOREIGN KEY (produto_id) REFERENCES public.produtos(id)
+);
+CREATE TABLE public.localizacoes_tempo_real (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  user_id uuid NOT NULL,
+  pedido_id uuid,
+  latitude double precision NOT NULL,
+  longitude double precision NOT NULL,
+  tipo_localizacao text,
+  created_at timestamp with time zone DEFAULT now(),
+  perfil character varying,
+  lat double precision,
+  lng double precision,
+  is_online boolean DEFAULT true,
+  nome character varying,
+  updated_at timestamp without time zone DEFAULT now(),
+  CONSTRAINT localizacoes_tempo_real_pkey PRIMARY KEY (id)
+);
+CREATE TABLE public.lojas (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  user_id uuid NOT NULL,
+  nome text NOT NULL,
+  descricao text,
+  telefone text,
+  endereco text,
+  latitude double precision,
+  longitude double precision,
+  created_at timestamp with time zone NOT NULL DEFAULT timezone('utc'::text, now()),
+  nif text,
+  nicho text DEFAULT 'Universal'::text,
+  rating numeric DEFAULT 0,
+  review_count integer DEFAULT 0,
+  is_open boolean DEFAULT true,
+  cover_image text,
+  logo text,
+  is_verified boolean DEFAULT false,
+  response_time text,
+  sales_count integer DEFAULT 0,
+  badges jsonb DEFAULT '[]'::jsonb,
+  vendas_count integer DEFAULT 0,
+  CONSTRAINT lojas_pkey PRIMARY KEY (id),
+  CONSTRAINT lojas_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.usuarios(id)
+);
+CREATE TABLE public.lojas_localizacoes (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  loja_id uuid NOT NULL,
+  latitude numeric NOT NULL,
+  longitude numeric NOT NULL,
+  endereco text,
+  created_at timestamp with time zone DEFAULT now(),
+  updated_at timestamp with time zone DEFAULT now(),
+  CONSTRAINT lojas_localizacoes_pkey PRIMARY KEY (id)
+);
+CREATE TABLE public.marcas_veiculos (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  nome text NOT NULL UNIQUE,
+  pais_origem text,
+  logo_url text,
+  created_at timestamp with time zone NOT NULL DEFAULT timezone('utc'::text, now()),
+  CONSTRAINT marcas_veiculos_pkey PRIMARY KEY (id)
+);
+CREATE TABLE public.mensagens (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  remetente_id uuid NOT NULL,
+  destinatario_id uuid NOT NULL,
+  loja_id uuid,
+  conteudo text,
+  created_at timestamp with time zone NOT NULL DEFAULT timezone('utc'::text, now()),
+  imagem_url text,
+  pedido_id uuid,
+  data_expiracao timestamp with time zone,
+  CONSTRAINT mensagens_pkey PRIMARY KEY (id),
+  CONSTRAINT mensagens_remetente_id_fkey FOREIGN KEY (remetente_id) REFERENCES public.usuarios(id),
+  CONSTRAINT mensagens_destinatario_id_fkey FOREIGN KEY (destinatario_id) REFERENCES public.usuarios(id),
+  CONSTRAINT mensagens_loja_id_fkey FOREIGN KEY (loja_id) REFERENCES public.lojas(id)
+);
+CREATE TABLE public.modelos_veiculos (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  marca_id uuid,
+  nome text NOT NULL,
+  created_at timestamp with time zone NOT NULL DEFAULT timezone('utc'::text, now()),
+  CONSTRAINT modelos_veiculos_pkey PRIMARY KEY (id),
+  CONSTRAINT modelos_veiculos_marca_id_fkey FOREIGN KEY (marca_id) REFERENCES public.marcas_veiculos(id)
+);
+CREATE TABLE public.pedido_itens (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  pedido_id uuid NOT NULL,
+  produto_id uuid NOT NULL,
+  quantidade integer NOT NULL CHECK (quantidade > 0),
+  preco numeric NOT NULL,
+  CONSTRAINT pedido_itens_pkey PRIMARY KEY (id),
+  CONSTRAINT pedido_itens_pedido_id_fkey FOREIGN KEY (pedido_id) REFERENCES public.pedidos(id),
+  CONSTRAINT pedido_itens_produto_id_fkey FOREIGN KEY (produto_id) REFERENCES public.produtos(id)
+);
+CREATE TABLE public.pedidos (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  user_id uuid NOT NULL,
+  loja_id uuid NOT NULL,
+  status text NOT NULL DEFAULT 'PENDENTE'::text CHECK (status = ANY (ARRAY['PENDENTE'::text, 'PAGO'::text, 'PREPARANDO'::text, 'EM_ROTA'::text, 'ENTREGUE'::text, 'CANCELADO'::text])),
+  tipo_entrega text,
+  endereco_entrega text,
+  valor_total numeric NOT NULL,
+  created_at timestamp with time zone NOT NULL DEFAULT timezone('utc'::text, now()),
+  CONSTRAINT pedidos_pkey PRIMARY KEY (id),
+  CONSTRAINT pedidos_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.usuarios(id),
+  CONSTRAINT pedidos_loja_id_fkey FOREIGN KEY (loja_id) REFERENCES public.lojas(id)
+);
+CREATE TABLE public.produtos (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  loja_id uuid NOT NULL,
+  nome text NOT NULL,
+  categoria text,
+  marca text,
+  modelo text,
+  ano integer,
+  descricao text,
+  preco numeric NOT NULL,
+  estoque integer DEFAULT 0,
+  imagem_url text,
+  created_at timestamp with time zone NOT NULL DEFAULT timezone('utc'::text, now()),
+  is_original boolean DEFAULT false,
+  condicao text DEFAULT 'Novo'::text,
+  modelos_compativeis ARRAY DEFAULT '{}'::text[],
+  localizacao text,
+  tipo_motor text,
+  is_promo boolean DEFAULT false,
+  is_new boolean DEFAULT false,
+  CONSTRAINT produtos_pkey PRIMARY KEY (id),
+  CONSTRAINT produtos_loja_id_fkey FOREIGN KEY (loja_id) REFERENCES public.lojas(id)
+);
+CREATE TABLE public.ratings (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  avaliador_id uuid NOT NULL,
+  avaliado_id uuid NOT NULL,
+  tipo_avaliacao text,
+  estrelas integer,
+  comentario text,
+  created_at timestamp with time zone DEFAULT now(),
+  CONSTRAINT ratings_pkey PRIMARY KEY (id)
+);
+CREATE TABLE public.usuarios (
+  id uuid NOT NULL,
+  email text NOT NULL UNIQUE,
+  role text NOT NULL DEFAULT 'CLIENTE'::text CHECK (role = ANY (ARRAY['CLIENTE'::text, 'VENDEDOR'::text, 'ADMIN_MASTER'::text, 'ENTREGADOR'::text])),
+  status_conta text NOT NULL DEFAULT 'ATIVO'::text CHECK (status_conta = ANY (ARRAY['ATIVO'::text, 'SUSPENSO'::text, 'BANIDO'::text])),
+  nome text,
+  telefone text,
+  created_at timestamp with time zone NOT NULL DEFAULT timezone('utc'::text, now()),
+  avatar_url text,
+  CONSTRAINT usuarios_pkey PRIMARY KEY (id)
+);
+CREATE TABLE public.veiculos (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  user_id uuid NOT NULL,
+  marca text NOT NULL,
+  modelo text NOT NULL,
+  ano integer NOT NULL,
+  created_at timestamp with time zone NOT NULL DEFAULT timezone('utc'::text, now()),
+  n_motor text,
+  n_chassi text,
+  vin text UNIQUE,
+  versao text,
+  tipo_carroceria text CHECK (tipo_carroceria = ANY (ARRAY['Sedan'::text, 'Hatch'::text, 'SUV'::text, 'Pickup'::text, 'Coupe'::text, 'Wagon'::text, 'Van'::text, 'Convertible'::text])),
+  tipo_motor text,
+  combustivel text CHECK (combustivel = ANY (ARRAY['Gasolina'::text, 'Diesel'::text, 'Flex'::text, 'Elétrico'::text, 'Híbrido'::text])),
+  codigo_motor text,
+  potencia integer,
+  transmissao text CHECK (transmissao = ANY (ARRAY['Manual'::text, 'Automática'::text, 'CVT'::text, 'DSG'::text, 'Semi-automática'::text])),
+  ano_modelo integer,
+  cor text,
+  quilometragem integer,
+  placa text,
+  observacoes text,
+  CONSTRAINT veiculos_pkey PRIMARY KEY (id),
+  CONSTRAINT veiculos_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.usuarios(id)
+);
+
+………………………..
+VENDEDOR FEITO
+agora vamos trabalhar por etapas vamos trabalhar com Perfil vendedor mapa  [Pasted text #1 +9 lines], deve abrir o
+  mapa normal de Angola google mapas, filtar na provincia onde esta cadastrada apartir do cadastro gps e sua
+  localização, se ouver clientes alistar por distância Até 5 kmAté 10 kmAté 15 kmAté 25 km, se não estiver o mapa fica
+  aberto em tempo real com todas divisoes mapa real e disigner do mapa original real, se ouver algum cliente nestes
+  imediações Até 5 kmAté 10 kmAté 15 kmAté 25 km marcar, se fazer compra marcar o cliente que fez a compra de onde
+  estiver ate a loja tracar uma rota até a loja isto é no mapa da loja, ainda ao fazer o pedido nos detalhes de
+  pedidos da loja ao clicar em  acompanhar deve abrir o mesmo mapa marcando o cliente que fez o pedido até a loja
+  tracando a rota marcar da sua localizacao ate a loja e em tempo real atualizar onde estiver pintar a rota azul.
+  significa que no perfil cliente seram dois tipos de mapa o mapa do menu, e mapa que filtra ao clicar em acompnhar o
+  cliente ou todos clientes que fizeram pedidos.
+
+🧭 Módulo: Perfil Vendedor – Sistema de Mapa Inteligente (Versão Melhorada)
+📍 1. Mapa Principal (Visualização Geral)
+Ao abrir o Perfil Vendedor, deve carregar o Google Maps padrão de Angola.
+O mapa deve iniciar automaticamente na localização do vendedor (GPS do cadastro).
+Deve respeitar a província onde o vendedor está cadastrado, centralizando a visualização nessa área.
+O mapa deve manter o estilo original do Google Maps (sem alteração visual pesada).
+📍 2. Filtragem de Clientes por Distância
+
+O sistema deve identificar clientes próximos ao vendedor e agrupar por raio:
+
+Até 5 km
+Até 10 km
+Até 15 km
+Até 25 km
+
+📌 Regras:
+
+Se existirem clientes dentro desses raios, eles devem ser marcados no mapa com pins/markers diferentes por distância.
+Se não existirem clientes próximos, o mapa permanece livre em tempo real, mostrando toda a divisão geográfica normal de Angola.
+📍 3. Marcação Inteligente no Mapa
+Clientes próximos devem aparecer como marcadores ativos (pins).
+Cada cliente deve mostrar:
+Nome
+Distância
+Status (online / fez pedido / ativo)
+📍 4. Sistema de Pedidos (Tracking em Tempo Real)
+
+Quando um cliente fizer um pedido:
+
+O sistema deve ativar rastreamento automático no mapa da loja.
+Deve ser criada uma rota em tempo real (linha azul):
+Origem: localização atual do cliente
+Destino: loja do vendedor
+
+📌 O mapa deve:
+
+Atualizar posição do cliente em tempo real
+Ajustar a rota automaticamente se o cliente se mover
+Manter a rota sempre visível em azul
+📍 5. Botão “Acompanhar Pedido”
+
+Na lista de pedidos da loja:
+
+Ao clicar em “Acompanhar”, deve abrir o mesmo mapa de tracking.
+O mapa deve:
+Destacar o cliente que fez o pedido
+Mostrar a rota até a loja
+Permitir ver atualização em tempo real da localização
+📍 6. Tipos de Mapa no Sistema
+
+O sistema terá 2 modos principais de mapa no perfil cliente/vendedor:
+
+🗺️ Modo 1: Mapa do Menu (Geral)
+Visualização normal do Google Maps
+Mostra localização geral e clientes próximos (se existirem)
+🚚 Modo 2: Mapa de Acompanhamento (Tracking)
+Ativado ao clicar em “Acompanhar pedido”
+Mostra:
+Cliente específico
+Loja
+Rota em tempo real (linha azul)
+Atualização contínua da posição
+⚙️ 7. Regras Técnicas Importantes
+GPS deve ser obrigatório no cadastro do vendedor e cliente
+Atualização em tempo real (realtime tracking)
+Sistema deve priorizar precisão de localização
+Otimização para uso mobile e desktop
+Uso de markers diferentes por status (cliente, pedido, rota ativa)
+…………………………
+CLIENTE
+
+🗺️ Módulo Cliente – Sistema de Mapas Inteligentes (Versão Melhorada)
+📍 1. Estrutura Geral (Cliente)
+
+O cliente terá 2 mapas diferentes no sistema, cada um com uma função específica:
+
+🧭 MAPA 1: Mapa do Menu (Exploração de Lojas)
+🎯 Objetivo:
+
+Permitir que o cliente veja todas as lojas cadastradas na plataforma.
+
+📌 Regras:
+Ao abrir o Mapa do Menu, deve carregar o Google Maps real (estilo original, limpo e moderno) mudar o que está la esta muito estranho parece disigner sem detalhes do google mapas normal puxar tudo real.
+Mostrar todas as lojas cadastradas no sistema como marcadores (pins).
+Cada loja deve exibir:
+Nome da loja
+Categoria
+Distância do cliente
+Status (online / ativo)
+📍 Comportamento dos Pins:
+Cada loja deve ter um pin separado (sem sobreposição).
+Evitar empilhamento de marcadores:
+Usar cluster inteligente ou separação automática de pins.
+Ao clicar em um pin:
+Abrir um card com detalhes da loja
+Mostrar opções como “Ver produtos” ou “Fazer pedido”
+🎨 Design do Mapa:
+Usar Google Maps original (não estilizado de forma pesada).
+Interface limpa, moderna e profissional.
+Apenas melhorias leves de UI (ex: cards, sombras, animações suaves).
+🚚 MAPA 2: Mapa de Acompanhamento de Pedido (Tracking em Tempo Real)
+🎯 Objetivo:
+
+Acompanhar um pedido feito pelo cliente até a loja.
+
+📌 Ativação:
+Ao fazer um pedido, nos detalhes do pedido, ao clicar em:
+👉 “Acompanhar Pedido”
+Deve abrir automaticamente o Mapa de Tracking.
+📍 O que o mapa deve mostrar:
+📌 Pino da loja selecionada
+📌 Pino da localização atual do cliente
+🛣️ Rota traçada entre cliente e loja
+🧭 Comportamento da Rota:
+A rota deve ser em tempo real (live tracking).
+Linha da rota deve ser visível (ex: azul).
+Atualização contínua da posição do cliente enquanto se desloca.
+O mapa deve acompanhar o movimento automaticamente.
+🔒 Regras do Tracking:
+O mapa fica ativo apenas durante o pedido.
+Quando o pedido for concluído ou retirado na loja:
+O tracking deve ser encerrado automaticamente.
+A rota desaparece.
+O mapa volta ao estado normal.
+⚙️ Regras Gerais do Sistema de Mapas
+Sempre usar Google Maps real (API oficial).
+Performance otimizada para mobile e desktop.
+Sem sobreposição de pins (usar clustering inteligente).
+Atualização em tempo real obrigatória no mapa de tracking.
+Sistema deve ser leve, rápido e responsivo.
+UX moderna, mas mantendo fidelidade ao mapa original.
+📌 Resumo do Sistema
+🗺️ Cliente tem 2 mapas:
+Exploração de lojas (menu)
+Acompanhamento de pedido (tracking)
+🚚 Tracking mostra rota em tempo real até a loja
+📍 Pins organizados sem sobreposição
+🎯 Interface baseada no Google Maps real
+
+…………………………………………………………….
+DETALHES DA LOJA
+
+🏪 Módulo: Perfil Vendedor – Aba “Minha Loja” (Sistema Completo Inteligente)
+📌 1. Estrutura da Tela “Minha Loja”
+
+A aba Minha Loja deve permitir ao vendedor gerir totalmente o seu negócio com interface moderna e dados em tempo real.
+
+🖼️ Identidade da Loja
+📸 Capa da Loja
+Upload / alterar imagem de capa
+Suporte: PNG, JPG (máx 2MB)
+Atualização imediata
+🪪 Logo da Loja
+Upload / troca de logo
+PNG, JPG (máx 2MB)
+🏷️ 2. Informações da Loja
+
+Campos editáveis:
+
+📛 Nome da Loja
+📝 Descrição
+🧾 NIF
+🎯 Especialidade (ex: Universal, Tecnologia, Alimentação, etc.)
+📞 Telefone
+📍 3. Sistema de Endereço Inteligente (NOVO)
+
+A loja terá dois tipos de localização obrigatórios:
+
+📌 Endereço 1
+Endereço textual normal:
+Ex: “Correios, Rua 1, Prédio 12, 3º andar, Loja 13”
+📍 Endereço 2 (GPS em tempo real)
+Localização geográfica real:
+Latitude
+Longitude
+Capturada automaticamente via GPS do dispositivo
+Atualização em tempo real no sistema, erro a ocorrer no mapa real das lojas as lojas continua no mesmo local uige mesmo a loja lau lda sendo cadastrada em luanda revê isto então deve atualizar o indereco em tempo real usar gps do site
+
+📌 Este GPS deve:
+
+Atualizar a posição da loja no mapa automaticamente
+Sincronizar com o banco de dados (Supabase)
+Ser usado para mapas de clientes e entregas
+🗺️ 4. Integração com Mapa (Tempo Real)
+A localização da loja deve aparecer no Google Maps real
+Atualização automática sempre que o GPS mudar
+A loja deve ser visível no mapa do cliente e vendedor
+📊 5. Estatísticas da Loja (Dashboard)
+
+Exibir dados em tempo real:
+
+⭐ Avaliação média (rating)
+Ex: 0.0 (0 reviews)
+🛒 Vendas totais
+📦 Produtos cadastrados
+📈 Crescimento da loja (opcional futuro)
+💾 6. Botão: “Salvar Alterações”
+📌 Ao clicar em SALVAR:
+
+O sistema deve:
+
+🔄 1. Atualizar dados no Supabase (SQL)
+Tabela principal: lojas
+Atualizar:
+nome
+descrição
+telefone
+nif
+nicho/especialidade
+cover_image
+logo
+latitude
+longitude
+endereço
+📍 2. Atualizar localização GPS
+Inserir/atualizar:
+latitude
+longitude
+Sincronizar também com:
+lojas_localizacoes
+localizacoes_tempo_real
+🧠 3. Registro de auditoria (IMPORTANTE)
+Inserir log na tabela:
+audit_logs
+Registrar:
+tipo de ação: UPDATE
+dados antigos vs novos
+user_id do vendedor
+🧭 7. Regras de Sistema (IMPORTANTE)
+✔️ Apenas vendedores podem editar “Minha Loja”
+✔️ Atualização em tempo real obrigatória (Supabase realtime)
+✔️ GPS deve ser preciso e contínuo
+✔️ Dados nunca podem ser sobrescritos sem log
+✔️ Interface deve ser moderna, limpa e responsiva
+✔️ Sincronização imediata com mapa do sistema
+🗺️ 8. Integração com Sistema de Mapas
+
+A loja atualizada deve automaticamente aparecer em:
+
+🗺️ Mapa do cliente (lista de lojas)
+🚚 Mapa de pedidos
+📍 Sistema de tracking
+🔎 Filtros por proximidade
+📌 RESUMO FINAL
+
+Este módulo permite que o vendedor tenha:
+
+🏪 Loja totalmente editável
+📍 GPS real em tempo real
+🗺️ Integração direta com mapas
+📊 Estatísticas automáticas
+💾 Sincronização completa com Supabase
+🔒 Auditoria de todas as alterações
+………………………………….
+CLIENTE SEM CADSTRO
+SO VISULIZAR SEM FAZER NADA.

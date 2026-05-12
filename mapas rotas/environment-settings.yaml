@@ -1,0 +1,8 @@
+currentEnvironment:
+  name: Production
+  key: PROD
+environments:
+  - name: Development
+    key: qze4de
+  - name: Staging
+    key: 04j0lo

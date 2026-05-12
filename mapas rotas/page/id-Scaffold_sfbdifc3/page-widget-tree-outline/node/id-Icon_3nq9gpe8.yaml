@@ -1,0 +1,15 @@
+key: Icon_3nq9gpe8
+type: Icon
+props:
+  icon:
+    sizeValue:
+      inputValue: 24
+    colorValue:
+      inputValue:
+        themeColor: PRIMARY_TEXT
+    iconDataValue:
+      inputValue:
+        codePoint: 58894
+        family: MaterialIcons
+        matchTextDirection: false
+        name: straighten

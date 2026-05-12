@@ -1,0 +1,21 @@
+key: Column_u9itp5p5
+type: Column
+props:
+  column:
+    primary: true
+    listSpacing:
+      spacingValue:
+        inputValue: 8
+    minSizeValue:
+      inputValue: true
+  padding:
+    type: FF_PADDING_ALL
+    allValue:
+      inputValue: 16
+      mostRecentInputValue: 16
+  responsiveVisibility: {}
+  opacity:
+    opacityValue:
+      inputValue: 1
+    animatedOpacity: {}
+valueKey: {}

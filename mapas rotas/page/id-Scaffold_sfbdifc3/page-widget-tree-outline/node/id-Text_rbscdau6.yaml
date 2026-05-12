@@ -1,0 +1,34 @@
+key: Text_rbscdau6
+type: Text
+props:
+  text:
+    themeStyle: BODY_MEDIUM
+    autoSize: true
+    translationIdentifier:
+      key: c9pkv4k5
+    selectable: false
+    textValue:
+      variable:
+        source: LOCAL_STATE
+        defaultValue:
+          serializedValue: " "
+        baseVariable:
+          localState:
+            fieldIdentifier:
+              name: durationTexts
+              key: pz3vn
+            stateVariableType: WIDGET_CLASS_STATE
+        nodeKeyRef:
+          key: Scaffold_sfbdifc3
+        uiBuilderValue:
+          serializedValue: duration
+    maxLinesValue:
+      inputValue: 2
+  expanded:
+    expandedType: EXPANDED
+  responsiveVisibility: {}
+  opacity:
+    opacityValue:
+      inputValue: 1
+    animatedOpacity: {}
+valueKey: {}

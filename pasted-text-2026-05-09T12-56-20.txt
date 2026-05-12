@@ -1,0 +1,281 @@
+-- WARNING: This schema is for context only and is not meant to be run.
+-- Table order and constraints may not be valid for execution.
+
+CREATE TABLE public.audit_logs (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  tabela text NOT NULL,
+  registro_id uuid NOT NULL,
+  acao text NOT NULL CHECK (acao = ANY (ARRAY['INSERT'::text, 'UPDATE'::text, 'DELETE'::text])),
+  dados_antigos jsonb,
+  dados_novos jsonb,
+  realizado_por uuid,
+  created_at timestamp with time zone DEFAULT timezone('utc'::text, now()),
+  CONSTRAINT audit_logs_pkey PRIMARY KEY (id),
+  CONSTRAINT audit_logs_realizado_por_fkey FOREIGN KEY (realizado_por) REFERENCES public.profiles(id)
+);
+CREATE TABLE public.avaliacoes (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  profile_id uuid NOT NULL,
+  loja_id uuid NOT NULL,
+  nota integer NOT NULL CHECK (nota >= 1 AND nota <= 5),
+  comentario text,
+  created_at timestamp with time zone DEFAULT timezone('utc'::text, now()),
+  CONSTRAINT avaliacoes_pkey PRIMARY KEY (id),
+  CONSTRAINT avaliacoes_profile_id_fkey FOREIGN KEY (profile_id) REFERENCES public.profiles(id),
+  CONSTRAINT avaliacoes_loja_id_fkey FOREIGN KEY (loja_id) REFERENCES public.lojas(id)
+);
+CREATE TABLE public.contactos (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  profile_id uuid NOT NULL,
+  contacto_id uuid NOT NULL,
+  nome_tipo text,
+  criado_em timestamp with time zone DEFAULT now(),
+  CONSTRAINT contactos_pkey PRIMARY KEY (id),
+  CONSTRAINT contactos_profile_id_fkey FOREIGN KEY (profile_id) REFERENCES public.profiles(id),
+  CONSTRAINT contactos_contacto_id_fkey FOREIGN KEY (contacto_id) REFERENCES public.profiles(id)
+);
+CREATE TABLE public.entregas (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  pedido_id uuid NOT NULL,
+  entregador_id uuid,
+  status text DEFAULT 'AGUARDANDO'::text CHECK (status = ANY (ARRAY['AGUARDANDO'::text, 'A_CAMINHO'::text, 'ENTREGUE'::text, 'FALHOU'::text])),
+  latitude double precision,
+  longitude double precision,
+  created_at timestamp with time zone DEFAULT timezone('utc'::text, now()),
+  updated_at timestamp with time zone DEFAULT timezone('utc'::text, now()),
+  location USER-DEFINED,
+  CONSTRAINT entregas_pkey PRIMARY KEY (id),
+  CONSTRAINT entregas_pedido_id_fkey FOREIGN KEY (pedido_id) REFERENCES public.pedidos(id),
+  CONSTRAINT entregas_entregador_id_fkey FOREIGN KEY (entregador_id) REFERENCES public.profiles(id)
+);
+CREATE TABLE public.favoritos (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  profile_id uuid NOT NULL,
+  loja_id uuid,
+  produto_id uuid,
+  created_at timestamp with time zone DEFAULT timezone('utc'::text, now()),
+  CONSTRAINT favoritos_pkey PRIMARY KEY (id),
+  CONSTRAINT favoritos_profile_id_fkey FOREIGN KEY (profile_id) REFERENCES public.profiles(id),
+  CONSTRAINT favoritos_loja_id_fkey FOREIGN KEY (loja_id) REFERENCES public.lojas(id),
+  CONSTRAINT favoritos_produto_id_fkey FOREIGN KEY (produto_id) REFERENCES public.produtos(id)
+);
+CREATE TABLE public.funcionarios (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  loja_id uuid NOT NULL,
+  profile_id uuid NOT NULL,
+  cargo text DEFAULT 'FUNCIONARIO'::text CHECK (cargo = ANY (ARRAY['GERENTE'::text, 'ATENDENTE'::text, 'ESTOQUISTA'::text, 'ENTREGADOR'::text, 'FUNCIONARIO'::text])),
+  ativo boolean DEFAULT true,
+  created_at timestamp with time zone DEFAULT timezone('utc'::text, now()),
+  updated_at timestamp with time zone DEFAULT timezone('utc'::text, now()),
+  CONSTRAINT funcionarios_pkey PRIMARY KEY (id),
+  CONSTRAINT funcionarios_loja_id_fkey FOREIGN KEY (loja_id) REFERENCES public.lojas(id),
+  CONSTRAINT funcionarios_profile_id_fkey FOREIGN KEY (profile_id) REFERENCES public.profiles(id)
+);
+CREATE TABLE public.localizacoes_tempo_real (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  profile_id uuid NOT NULL UNIQUE,
+  pedido_id uuid,
+  latitude double precision NOT NULL,
+  longitude double precision NOT NULL,
+  tipo text DEFAULT 'CLIENTE'::text CHECK (tipo = ANY (ARRAY['CLIENTE'::text, 'VENDEDOR'::text, 'ENTREGADOR'::text])),
+  is_online boolean DEFAULT true,
+  provincia text,
+  cidade text,
+  created_at timestamp with time zone DEFAULT timezone('utc'::text, now()),
+  updated_at timestamp with time zone DEFAULT timezone('utc'::text, now()),
+  location USER-DEFINED,
+  tipo_localizacao text,
+  CONSTRAINT localizacoes_tempo_real_pkey PRIMARY KEY (id),
+  CONSTRAINT localizacoes_tempo_real_profile_id_fkey FOREIGN KEY (profile_id) REFERENCES public.profiles(id),
+  CONSTRAINT localizacoes_tempo_real_pedido_id_fkey FOREIGN KEY (pedido_id) REFERENCES public.pedidos(id)
+);
+CREATE TABLE public.lojas (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  owner_id uuid NOT NULL,
+  nome text NOT NULL,
+  descricao text,
+  telefone text,
+  nif text,
+  nicho text DEFAULT 'Universal'::text,
+  endereco text,
+  provincia text,
+  cidade text,
+  bairro text,
+  endereco_completo text,
+  latitude double precision,
+  longitude double precision,
+  cover_image text,
+  logo text,
+  rating numeric DEFAULT 0,
+  review_count integer DEFAULT 0,
+  vendas_count integer DEFAULT 0,
+  is_open boolean DEFAULT true,
+  is_verified boolean DEFAULT false,
+  response_time text,
+  badges jsonb DEFAULT '[]'::jsonb,
+  deleted_at timestamp with time zone,
+  created_at timestamp with time zone DEFAULT timezone('utc'::text, now()),
+  updated_at timestamp with time zone DEFAULT timezone('utc'::text, now()),
+  lat numeric,
+  lng numeric,
+  location USER-DEFINED,
+  CONSTRAINT lojas_pkey PRIMARY KEY (id),
+  CONSTRAINT lojas_owner_id_fkey FOREIGN KEY (owner_id) REFERENCES public.profiles(id)
+);
+CREATE TABLE public.marcas_veiculos (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  nome text NOT NULL UNIQUE,
+  pais_origem text,
+  logo_url text,
+  created_at timestamp with time zone DEFAULT timezone('utc'::text, now()),
+  CONSTRAINT marcas_veiculos_pkey PRIMARY KEY (id)
+);
+CREATE TABLE public.mensagens (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  remetente_id uuid NOT NULL,
+  destinatario_id uuid NOT NULL,
+  loja_id uuid,
+  pedido_id uuid,
+  conteudo text,
+  imagem_url text,
+  lida boolean DEFAULT false,
+  data_expiracao timestamp with time zone,
+  created_at timestamp with time zone DEFAULT timezone('utc'::text, now()),
+  CONSTRAINT mensagens_pkey PRIMARY KEY (id),
+  CONSTRAINT mensagens_remetente_id_fkey FOREIGN KEY (remetente_id) REFERENCES public.profiles(id),
+  CONSTRAINT mensagens_destinatario_id_fkey FOREIGN KEY (destinatario_id) REFERENCES public.profiles(id),
+  CONSTRAINT mensagens_loja_id_fkey FOREIGN KEY (loja_id) REFERENCES public.lojas(id),
+  CONSTRAINT mensagens_pedido_id_fkey FOREIGN KEY (pedido_id) REFERENCES public.pedidos(id)
+);
+CREATE TABLE public.modelos_veiculos (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  marca_id uuid,
+  nome text NOT NULL,
+  created_at timestamp with time zone DEFAULT timezone('utc'::text, now()),
+  CONSTRAINT modelos_veiculos_pkey PRIMARY KEY (id),
+  CONSTRAINT modelos_veiculos_marca_id_fkey FOREIGN KEY (marca_id) REFERENCES public.marcas_veiculos(id)
+);
+CREATE TABLE public.pedido_itens (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  pedido_id uuid NOT NULL,
+  produto_id uuid NOT NULL,
+  quantidade integer NOT NULL CHECK (quantidade > 0),
+  preco numeric NOT NULL CHECK (preco >= 0::numeric),
+  CONSTRAINT pedido_itens_pkey PRIMARY KEY (id),
+  CONSTRAINT pedido_itens_pedido_id_fkey FOREIGN KEY (pedido_id) REFERENCES public.pedidos(id),
+  CONSTRAINT pedido_itens_produto_id_fkey FOREIGN KEY (produto_id) REFERENCES public.produtos(id)
+);
+CREATE TABLE public.pedidos (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  cliente_id uuid NOT NULL,
+  loja_id uuid NOT NULL,
+  status text NOT NULL DEFAULT 'PENDENTE'::text CHECK (status = ANY (ARRAY['PENDENTE'::text, 'PAGO'::text, 'PREPARANDO'::text, 'PRONTO_PARA_RETIRADA'::text, 'EM_ROTA'::text, 'ENTREGUE'::text, 'CANCELADO'::text])),
+  tipo_entrega text DEFAULT 'RETIRADA'::text CHECK (tipo_entrega = ANY (ARRAY['RETIRADA'::text, 'ENTREGA'::text])),
+  endereco_entrega text,
+  valor_total numeric NOT NULL CHECK (valor_total >= 0::numeric),
+  cliente_lat double precision,
+  cliente_lng double precision,
+  loja_lat double precision,
+  loja_lng double precision,
+  provincia text,
+  codigo_rastreamento text DEFAULT ('CL-'::text || upper(substr((gen_random_uuid())::text, 1, 8))) UNIQUE,
+  created_at timestamp with time zone DEFAULT timezone('utc'::text, now()),
+  updated_at timestamp with time zone DEFAULT timezone('utc'::text, now()),
+  cliente_location USER-DEFINED,
+  loja_location USER-DEFINED,
+  CONSTRAINT pedidos_pkey PRIMARY KEY (id),
+  CONSTRAINT pedidos_cliente_id_fkey FOREIGN KEY (cliente_id) REFERENCES public.profiles(id),
+  CONSTRAINT pedidos_loja_id_fkey FOREIGN KEY (loja_id) REFERENCES public.lojas(id)
+);
+CREATE TABLE public.produtos (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  loja_id uuid NOT NULL,
+  nome text NOT NULL,
+  categoria text,
+  marca text,
+  modelo text,
+  ano integer,
+  descricao text,
+  preco numeric NOT NULL CHECK (preco > 0::numeric),
+  estoque integer DEFAULT 0,
+  imagem_url text,
+  is_original boolean DEFAULT false,
+  condicao text DEFAULT 'Novo'::text,
+  modelos_compativeis ARRAY DEFAULT '{}'::text[],
+  localizacao text,
+  tipo_motor text,
+  is_promo boolean DEFAULT false,
+  is_new boolean DEFAULT false,
+  deleted_at timestamp with time zone,
+  created_at timestamp with time zone DEFAULT timezone('utc'::text, now()),
+  updated_at timestamp with time zone DEFAULT timezone('utc'::text, now()),
+  CONSTRAINT produtos_pkey PRIMARY KEY (id),
+  CONSTRAINT produtos_loja_id_fkey FOREIGN KEY (loja_id) REFERENCES public.lojas(id)
+);
+CREATE TABLE public.profiles (
+  id uuid NOT NULL,
+  email text NOT NULL,
+  nome text,
+  telefone text,
+  avatar_url text,
+  role text NOT NULL DEFAULT 'CLIENTE'::text CHECK (role = ANY (ARRAY['CLIENTE'::text, 'VENDEDOR'::text, 'ENTREGADOR'::text, 'ADMIN_MASTER'::text])),
+  status_conta text NOT NULL DEFAULT 'ATIVO'::text CHECK (status_conta = ANY (ARRAY['ATIVO'::text, 'SUSPENSO'::text, 'BANIDO'::text])),
+  provincia text,
+  cidade text,
+  bairro text,
+  lat double precision,
+  lng double precision,
+  is_online boolean DEFAULT false,
+  ultima_localizacao_at timestamp with time zone,
+  deleted_at timestamp with time zone,
+  created_at timestamp with time zone DEFAULT timezone('utc'::text, now()),
+  updated_at timestamp with time zone DEFAULT timezone('utc'::text, now()),
+  location USER-DEFINED,
+  CONSTRAINT profiles_pkey PRIMARY KEY (id),
+  CONSTRAINT profiles_id_fkey FOREIGN KEY (id) REFERENCES auth.users(id)
+);
+CREATE TABLE public.rotas_historico (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  pedido_id uuid NOT NULL,
+  profile_id uuid NOT NULL,
+  latitude double precision NOT NULL,
+  longitude double precision NOT NULL,
+  recorded_at timestamp with time zone DEFAULT timezone('utc'::text, now()),
+  location USER-DEFINED,
+  CONSTRAINT rotas_historico_pkey PRIMARY KEY (id),
+  CONSTRAINT rotas_historico_pedido_id_fkey FOREIGN KEY (pedido_id) REFERENCES public.pedidos(id),
+  CONSTRAINT rotas_historico_profile_id_fkey FOREIGN KEY (profile_id) REFERENCES public.profiles(id)
+);
+CREATE TABLE public.spatial_ref_sys (
+  srid integer NOT NULL CHECK (srid > 0 AND srid <= 998999),
+  auth_name character varying,
+  auth_srid integer,
+  srtext character varying,
+  proj4text character varying,
+  CONSTRAINT spatial_ref_sys_pkey PRIMARY KEY (srid)
+);
+CREATE TABLE public.veiculos (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  profile_id uuid NOT NULL,
+  marca text NOT NULL,
+  modelo text NOT NULL,
+  ano integer NOT NULL,
+  versao text,
+  tipo_carroceria text CHECK (tipo_carroceria = ANY (ARRAY['Sedan'::text, 'Hatch'::text, 'SUV'::text, 'Pickup'::text, 'Coupe'::text, 'Wagon'::text, 'Van'::text, 'Convertible'::text])),
+  tipo_motor text,
+  combustivel text CHECK (combustivel = ANY (ARRAY['Gasolina'::text, 'Diesel'::text, 'Flex'::text, 'Elétrico'::text, 'Híbrido'::text])),
+  codigo_motor text,
+  potencia integer,
+  transmissao text CHECK (transmissao = ANY (ARRAY['Manual'::text, 'Automática'::text, 'CVT'::text, 'DSG'::text, 'Semi-automática'::text])),
+  ano_modelo integer,
+  cor text,
+  quilometragem integer,
+  placa text,
+  n_motor text,
+  n_chassi text,
+  vin text UNIQUE,
+  observacoes text,
+  created_at timestamp with time zone DEFAULT timezone('utc'::text, now()),
+  CONSTRAINT veiculos_pkey PRIMARY KEY (id),
+  CONSTRAINT veiculos_profile_id_fkey FOREIGN KEY (profile_id) REFERENCES public.profiles(id)
+);

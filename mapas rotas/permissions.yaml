@@ -1,0 +1,5 @@
+permissionMessages:
+  - permissionType: LOCATION
+    message:
+      translationIdentifier:
+        key: f84d4b4v

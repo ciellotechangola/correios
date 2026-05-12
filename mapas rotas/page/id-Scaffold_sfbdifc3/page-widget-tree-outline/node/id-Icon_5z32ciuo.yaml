@@ -1,0 +1,15 @@
+key: Icon_5z32ciuo
+type: Icon
+props:
+  icon:
+    sizeValue:
+      inputValue: 24
+    colorValue:
+      inputValue:
+        themeColor: INFO
+    iconDataValue:
+      inputValue:
+        codePoint: 984417
+        family: MaterialIcons
+        matchTextDirection: false
+        name: route

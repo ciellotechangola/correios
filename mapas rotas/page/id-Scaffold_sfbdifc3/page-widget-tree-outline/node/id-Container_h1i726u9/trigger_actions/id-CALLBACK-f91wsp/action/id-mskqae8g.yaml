@@ -1,0 +1,49 @@
+localStateUpdate:
+  updates:
+    - fieldIdentifier:
+        key: pz3vn
+      setValue:
+        variable:
+          source: ACTION_INPUTS
+          baseVariable:
+            actionInput:
+              actionInput: ACTION_PARAMETER
+              parameterIdentifier:
+                name: durationTexts
+                key: 7ktp2i
+          nodeKeyRef:
+            key: Container_h1i726u9
+    - fieldIdentifier:
+        key: dg424
+      setValue:
+        variable:
+          source: ACTION_INPUTS
+          baseVariable:
+            actionInput:
+              actionInput: ACTION_PARAMETER
+              parameterIdentifier:
+                name: distanceTexts
+                key: hdrmyf
+          nodeKeyRef:
+            key: Container_h1i726u9
+    - fieldIdentifier:
+        key: h59rt
+      setValue:
+        inputValue:
+          serializedValue: "true"
+    - fieldIdentifier:
+        key: z0n0c
+      setValue:
+        variable:
+          source: ACTION_INPUTS
+          baseVariable:
+            actionInput:
+              actionInput: ACTION_PARAMETER
+              parameterIdentifier:
+                name: staticDurationText
+                key: s0v5q7
+          nodeKeyRef:
+            key: Container_h1i726u9
+  updateType: WIDGET
+  stateVariableType: WIDGET_CLASS_STATE
+key: mskqae8g

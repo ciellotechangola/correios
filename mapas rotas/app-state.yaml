@@ -1,0 +1,20 @@
+fields:
+  - parameter:
+      identifier:
+        name: googleApiKey
+        key: icdu1gj3
+      dataType:
+        scalarType: String
+    persisted: true
+    serializedDefaultValue:
+      - AIzaSyCWedcol0QXHlDGrW_uKh1eN9onJsgBCE0
+  - parameter:
+      identifier:
+        name: defaultLocation
+        key: qz0rae1y
+      dataType:
+        scalarType: LatLng
+    persisted: false
+    serializedDefaultValue:
+      - "-10.283333,21.2333329"
+securePersistedValues: true

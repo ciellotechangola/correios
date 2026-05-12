@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 *)",
+      "Bash(tail -n +566 \"C:\\\\agentes\\\\claudecode\\\\projectos\\\\correios de luanda auto\\\\pages\\\\VendorStore.tsx\")",
+      "Read(//tmp/**)",
+      "Bash(npm run *)",
+      "Bash(npx tsc *)",
+      "Bash(dpkg --force-all --purge oracle-xe-21c)",
+      "Bash(dpkg --force-all --purge mysql-community-server)",
+      "Bash(dpkg --force-all --purge mysql-community-client)",
+      "Bash(dpkg --force-all --purge mysql-client)",
+      "Bash(dpkg --force-all --purge mysql-server)",
+      "Bash(rm -rf /data/postgresql)",
+      "Bash(rm -rf /data/mongodb)",
+      "Bash(rm -rf /data/couchdb)",
+      "Bash(rm -rf /data/sqlite)",
+      "Bash(rm -rf /data/neo4j)",
+      "Bash(ln -sf /usr/bin/mongosh /usr/bin/mongo)",
+      "Bash(ln -sf /usr/bin/mongosh /usr/bin/mongo-helpers)",
+      "Bash(docker volume *)"
+    ]
+  }
+}

@@ -1,0 +1,66 @@
+primary:
+  value: "4279262715"
+  darkModeColor:
+    value: "4279262715"
+secondary:
+  value: "4287285247"
+  darkModeColor:
+    value: "4287285247"
+tertiary:
+  value: "4293823328"
+  darkModeColor:
+    value: "4293823328"
+darkModeEnabled: true
+alternate:
+  value: "4292928487"
+  darkModeColor:
+    value: "4280363062"
+primaryBackground:
+  value: "4294375158"
+  darkModeColor:
+    value: "4279375132"
+secondaryBackground:
+  value: "4294967295"
+  darkModeColor:
+    value: "4279572512"
+primaryText:
+  value: "4279375132"
+  darkModeColor:
+    value: "4294967295"
+secondaryText:
+  value: "4284111968"
+  darkModeColor:
+    value: "4288782499"
+displayDarkMode: false
+accent1:
+  value: "1276141051"
+  darkModeColor:
+    value: "1276141051"
+accent2:
+  value: "1284163583"
+  darkModeColor:
+    value: "1284163583"
+accent3:
+  value: "1290701664"
+  darkModeColor:
+    value: "1290701664"
+accent4:
+  value: "3019898879"
+  darkModeColor:
+    value: "3004438555"
+success:
+  value: "4278372985"
+  darkModeColor:
+    value: "4278372985"
+warning:
+  value: "4291391302"
+  darkModeColor:
+    value: "4291391302"
+error:
+  value: "4293284948"
+  darkModeColor:
+    value: "4293284948"
+info:
+  value: "4294967295"
+  darkModeColor:
+    value: "4294967295"

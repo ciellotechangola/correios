@@ -1,0 +1,7 @@
+key: Row_g0usmhch
+type: Row
+props:
+  row:
+    listSpacing:
+      spacingValue:
+        inputValue: 8

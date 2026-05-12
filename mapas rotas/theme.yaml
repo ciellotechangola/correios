@@ -1,0 +1,282 @@
+loadingIndicatorStyle:
+  type: CIRCULAR
+  color:
+    themeColor: PRIMARY
+  diameter: 50
+defaultTypography:
+  primaryFontFamily: Readex Pro
+  secondaryFontFamily: Inter
+  displaySmall:
+    legacyFontSize: 32
+    fontFamily: Readex Pro
+    legacyFontWeight: w600
+    legacyColor:
+      themeColor: PRIMARY_TEXT
+    isCustomFont: false
+    fontSizeValue:
+      inputValue: 32
+    colorValue:
+      inputValue:
+        themeColor: PRIMARY_TEXT
+    fontWeightValue:
+      inputValue: w600
+  headlineMedium:
+    legacyFontSize: 22
+    fontFamily: Readex Pro
+    legacyFontWeight: w500
+    legacyColor:
+      themeColor: PRIMARY_TEXT
+    isCustomFont: false
+    fontSizeValue:
+      inputValue: 22
+    colorValue:
+      inputValue:
+        themeColor: PRIMARY_TEXT
+    fontWeightValue:
+      inputValue: w500
+  headlineSmall:
+    legacyFontSize: 20
+    fontFamily: Readex Pro
+    legacyFontWeight: w500
+    legacyColor:
+      themeColor: PRIMARY_TEXT
+    isCustomFont: false
+    fontSizeValue:
+      inputValue: 20
+    colorValue:
+      inputValue:
+        themeColor: PRIMARY_TEXT
+    fontWeightValue:
+      inputValue: w500
+  titleMedium:
+    legacyFontSize: 18
+    fontFamily: Readex Pro
+    legacyFontWeight: w500
+    legacyColor:
+      themeColor: INFO
+    isCustomFont: false
+    fontSizeValue:
+      inputValue: 18
+    colorValue:
+      inputValue:
+        themeColor: INFO
+    fontWeightValue:
+      inputValue: w500
+  titleSmall:
+    legacyFontSize: 16
+    fontFamily: Inter
+    legacyFontWeight: w500
+    legacyColor:
+      themeColor: INFO
+    isCustomFont: false
+    fontSizeValue:
+      inputValue: 16
+    colorValue:
+      inputValue:
+        themeColor: INFO
+    fontWeightValue:
+      inputValue: w500
+  bodyMedium:
+    legacyFontSize: 14
+    fontFamily: Inter
+    legacyFontWeight: w400
+    legacyColor:
+      themeColor: PRIMARY_TEXT
+    isCustomFont: false
+    fontSizeValue:
+      inputValue: 14
+    colorValue:
+      inputValue:
+        themeColor: PRIMARY_TEXT
+    fontWeightValue:
+      inputValue: w400
+  bodySmall:
+    legacyFontSize: 12
+    fontFamily: Inter
+    legacyFontWeight: w400
+    legacyColor:
+      themeColor: PRIMARY_TEXT
+    isCustomFont: false
+    fontSizeValue:
+      inputValue: 12
+    colorValue:
+      inputValue:
+        themeColor: PRIMARY_TEXT
+    fontWeightValue:
+      inputValue: w400
+  displayLarge:
+    legacyFontSize: 60
+    fontFamily: Readex Pro
+    legacyFontWeight: w400
+    legacyColor:
+      themeColor: PRIMARY_TEXT
+    fontSizeValue:
+      inputValue: 60
+    colorValue:
+      inputValue:
+        themeColor: PRIMARY_TEXT
+    fontWeightValue:
+      inputValue: w400
+  displayMedium:
+    legacyFontSize: 45
+    fontFamily: Readex Pro
+    legacyFontWeight: w400
+    legacyColor:
+      themeColor: PRIMARY_TEXT
+    fontSizeValue:
+      inputValue: 45
+    colorValue:
+      inputValue:
+        themeColor: PRIMARY_TEXT
+    fontWeightValue:
+      inputValue: w400
+  headlineLarge:
+    legacyFontSize: 32
+    fontFamily: Readex Pro
+    legacyFontWeight: w400
+    legacyColor:
+      themeColor: PRIMARY_TEXT
+    fontSizeValue:
+      inputValue: 32
+    colorValue:
+      inputValue:
+        themeColor: PRIMARY_TEXT
+    fontWeightValue:
+      inputValue: w400
+  titleLarge:
+    legacyFontSize: 22
+    fontFamily: Readex Pro
+    legacyFontWeight: w500
+    legacyColor:
+      themeColor: PRIMARY_TEXT
+    fontSizeValue:
+      inputValue: 22
+    colorValue:
+      inputValue:
+        themeColor: PRIMARY_TEXT
+    fontWeightValue:
+      inputValue: w500
+  labelLarge:
+    legacyFontSize: 16
+    fontFamily: Inter
+    legacyFontWeight: w500
+    legacyColor:
+      themeColor: SECONDARY_TEXT
+    isCustomFont: false
+    fontSizeValue:
+      inputValue: 16
+    colorValue:
+      inputValue:
+        themeColor: SECONDARY_TEXT
+    fontWeightValue:
+      inputValue: w500
+  labelMedium:
+    legacyFontSize: 14
+    fontFamily: Inter
+    legacyFontWeight: w500
+    legacyColor:
+      themeColor: SECONDARY_TEXT
+    isCustomFont: false
+    fontSizeValue:
+      inputValue: 14
+    colorValue:
+      inputValue:
+        themeColor: SECONDARY_TEXT
+    fontWeightValue:
+      inputValue: w500
+  labelSmall:
+    legacyFontSize: 12
+    fontFamily: Inter
+    legacyFontWeight: w500
+    legacyColor:
+      themeColor: SECONDARY_TEXT
+    isCustomFont: false
+    fontSizeValue:
+      inputValue: 12
+    colorValue:
+      inputValue:
+        themeColor: SECONDARY_TEXT
+    fontWeightValue:
+      inputValue: w500
+  bodyLarge:
+    legacyFontSize: 16
+    fontFamily: Inter
+    legacyColor:
+      themeColor: PRIMARY_TEXT
+    isCustomFont: false
+    fontSizeValue:
+      inputValue: 16
+    colorValue:
+      inputValue:
+        themeColor: PRIMARY_TEXT
+breakPoints:
+  small: 479
+  medium: 767
+  large: 991
+spacingTokens:
+  - identifier:
+      name: xs
+      key: xs
+    value: 4
+  - identifier:
+      name: sm
+      key: sm
+    value: 8
+  - identifier:
+      name: md
+      key: md
+    value: 16
+  - identifier:
+      name: lg
+      key: lg
+    value: 24
+  - identifier:
+      name: xl
+      key: xl
+    value: 32
+radiusTokens:
+  - identifier:
+      name: sm
+      key: sm
+    value: 8
+  - identifier:
+      name: md
+      key: md
+    value: 16
+  - identifier:
+      name: lg
+      key: lg
+    value: 24
+  - identifier:
+      name: full
+      key: full
+    value: 9999
+shadowTokens:
+  - identifier:
+      name: sm
+      key: sm
+    blurRadius: 3
+    color:
+      value: "436207616"
+    dy: 1
+  - identifier:
+      name: md
+      key: md
+    blurRadius: 6
+    color:
+      value: "436207616"
+    dy: 3
+  - identifier:
+      name: lg
+      key: lg
+    blurRadius: 15
+    color:
+      value: "436207616"
+    dy: 8
+  - identifier:
+      name: xl
+      key: xl
+    blurRadius: 25
+    color:
+      value: "436207616"
+    dy: 16

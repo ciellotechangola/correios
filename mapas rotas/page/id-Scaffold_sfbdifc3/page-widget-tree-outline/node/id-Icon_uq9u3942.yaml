@@ -1,0 +1,21 @@
+key: Icon_uq9u3942
+type: Icon
+props:
+  icon:
+    sizeValue:
+      inputValue: 24
+    colorValue:
+      inputValue:
+        themeColor: ERROR
+    iconDataValue:
+      inputValue:
+        codePoint: 57998
+        family: MaterialIcons
+        matchTextDirection: false
+        name: flag
+  responsiveVisibility: {}
+  opacity:
+    opacityValue:
+      inputValue: 1
+    animatedOpacity: {}
+valueKey: {}

@@ -1,0 +1,24 @@
+name: Google Maps Route
+authPageInfo:
+  homePageNodeKeyRef:
+    key: Scaffold_sfbdifc3
+  signInPageNodeKeyRef:
+    key: Scaffold_aafbjq5s
+appSettings:
+  advancedSettings:
+    webBuildSettings: {}
+routingSettings:
+  enableRouting: true
+  pagesAreSubroutesOfRoot: false
+initialPageKeyRef:
+  key: Scaffold_sfbdifc3
+allAppNames:
+  appNames:
+    PROD:
+      packageName: com.appycloud.googlemapsroute
+    v2had5:
+      packageName: com.drivird.drivird
+    qze4de:
+      packageName: com.drivird.drivird
+    04j0lo:
+      packageName: com.drivird.drivird

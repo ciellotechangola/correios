@@ -1,0 +1,49 @@
+key: SwitchListTile_mf1el6p0
+type: SwitchListTile
+props:
+  switchListTile:
+    title:
+      themeStyle: BODY_LARGE
+      translationIdentifier:
+        key: o50k4wrr
+      textValue:
+        inputValue: Avoid tolls
+    subtitle:
+      themeStyle: LABEL_LARGE
+      translationIdentifier:
+        key: arz170zc
+      textValue:
+        inputValue: ""
+    borderRadius:
+      type: FF_BORDER_RADIUS_ALL
+      allValue:
+        inputValue: 8
+    leading: false
+    initialValueValue:
+      variable:
+        source: LOCAL_STATE
+        baseVariable:
+          localState:
+            fieldIdentifier:
+              name: avoidToll
+              key: cqu2l
+            stateVariableType: WIDGET_CLASS_STATE
+        nodeKeyRef:
+          key: Scaffold_sfbdifc3
+      mostRecentInputValue: false
+    denseValue:
+      inputValue: true
+    activeColorValue:
+      inputValue:
+        themeColor: ALTERNATE
+    activeTrackColorValue:
+      inputValue:
+        themeColor: PRIMARY
+  platformType: ADAPTIVE
+  responsiveVisibility: {}
+  opacity:
+    opacityValue:
+      inputValue: 1
+    animatedOpacity: {}
+name: SwitchListTileAvoidTolls
+valueKey: {}

@@ -1,0 +1,207 @@
+key: Container_h1i726u9
+type: Container
+props:
+  padding:
+    topValue:
+      inputValue: 162
+    animatedPadding: {}
+  responsiveVisibility: {}
+  opacity:
+    opacityValue:
+      inputValue: 1
+    animatedOpacity: {}
+  animatedAlignment: {}
+parameterValues:
+  parameterPasses:
+    m10op6:
+      paramIdentifier:
+        name: dimensions
+        key: m10op6
+      widgetProperty:
+        dimensions:
+          width:
+            pixelsValue:
+              inputValue: Infinity
+          height:
+            pixelsValue:
+              inputValue: Infinity
+    71dvl1:
+      paramIdentifier:
+        name: origin
+        key: 71dvl1
+      variable:
+        source: WIDGET_STATE
+        baseVariable:
+          widgetState:
+            returnParameter:
+              dataType:
+                scalarType: GooglePlace
+        operations:
+          - accessGooglePlaceField:
+              placeField: LAT_LNG
+        dynamicComponentAccess: {}
+        nodeKeyRef:
+          key: PlacePicker_gvlmoe1h
+    9nvisu:
+      paramIdentifier:
+        name: destination
+        key: 9nvisu
+      variable:
+        source: WIDGET_STATE
+        baseVariable:
+          widgetState:
+            returnParameter:
+              dataType:
+                scalarType: GooglePlace
+        operations:
+          - accessGooglePlaceField:
+              placeField: LAT_LNG
+        nodeKeyRef:
+          key: PlacePicker_jh71yfsw
+    917zbo:
+      paramIdentifier:
+        name: googleApiKey
+        key: 917zbo
+      variable:
+        source: LOCAL_STATE
+        baseVariable:
+          localState:
+            fieldIdentifier:
+              name: googleApiKey
+              key: icdu1gj3
+            stateVariableType: APP_STATE
+    ddefs7:
+      paramIdentifier:
+        name: initialLocation
+        key: ddefs7
+      variable:
+        source: FUNCTION_CALL
+        functionCall:
+          conditionalValue:
+            ifConditionalValues:
+              - condition:
+                  source: FUNCTION_CALL
+                  functionCall:
+                    values:
+                      - variable:
+                          source: GLOBAL_PROPERTIES
+                          baseVariable:
+                            globalProperties:
+                              property: CURRENT_DEVICE_LOCATION
+                      - {}
+                    condition:
+                      relation: EXISTS_AND_NON_EMPTY
+                value:
+                  variable:
+                    source: GLOBAL_PROPERTIES
+                    baseVariable:
+                      globalProperties:
+                        property: CURRENT_DEVICE_LOCATION
+            elseValue:
+              variable:
+                source: LOCAL_STATE
+                baseVariable:
+                  localState:
+                    fieldIdentifier:
+                      name: defaultLocation
+                      key: qz0rae1y
+                    stateVariableType: APP_STATE
+            returnParameter:
+              identifier:
+                name: initialLocation
+                key: ddefs7
+              dataType:
+                scalarType: LatLng
+                nonNullable: false
+    gx8scs:
+      paramIdentifier:
+        name: routeColor
+        key: gx8scs
+      inputValue:
+        color:
+          themeColor: PRIMARY
+    cwomi3:
+      paramIdentifier:
+        name: padding
+        key: cwomi3
+      inputValue:
+        serializedValue: "80.0"
+    tu613a:
+      paramIdentifier:
+        name: avoidTolls
+        key: tu613a
+      variable:
+        source: FUNCTION_CALL
+        functionCall:
+          conditionalValue:
+            ifConditionalValues:
+              - condition:
+                  source: FUNCTION_CALL
+                  functionCall:
+                    values:
+                      - variable:
+                          source: WIDGET_STATE
+                          baseVariable:
+                            widgetState:
+                              returnParameter:
+                                dataType:
+                                  scalarType: Boolean
+                          nodeKeyRef:
+                            key: SwitchListTile_mf1el6p0
+                      - {}
+                    condition:
+                      relation: EXISTS_AND_NON_EMPTY
+                value:
+                  variable:
+                    source: WIDGET_STATE
+                    baseVariable:
+                      widgetState:
+                        returnParameter:
+                          dataType:
+                            scalarType: Boolean
+                    nodeKeyRef:
+                      key: SwitchListTile_mf1el6p0
+            elseValue:
+              variable:
+                source: LOCAL_STATE
+                baseVariable:
+                  localState:
+                    fieldIdentifier:
+                      name: avoidToll
+                      key: cqu2l
+                    stateVariableType: WIDGET_CLASS_STATE
+                nodeKeyRef:
+                  key: Scaffold_sfbdifc3
+            returnParameter:
+              identifier:
+                name: avoidTolls
+                key: tu613a
+              dataType:
+                scalarType: Boolean
+                nonNullable: true
+  customWidgetIdentifier:
+    name: GoogleMapsRoute
+    key: v4m2f
+animations:
+  - trigger: ON_PAGE_LOAD
+    effects:
+      - curve: EASE_IN_OUT
+        fade:
+          begin:
+            inputValue:
+              serializedValue: "0"
+          end:
+            inputValue:
+              serializedValue: "1"
+        delay:
+          inputValue:
+            serializedValue: "0"
+        duration:
+          inputValue:
+            serializedValue: "600.0"
+    applyInitialState: true
+enforceCustomWidgetDimensions: true
+valueKey: {}
+customWidgetIdentifier:
+  name: GoogleMapsRoute
+  key: v4m2f

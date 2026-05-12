@@ -1,0 +1,34 @@
+key: Text_9xpq7yyg
+type: Text
+props:
+  text:
+    themeStyle: BODY_MEDIUM
+    autoSize: true
+    translationIdentifier:
+      key: zbl0cbzl
+    selectable: false
+    textValue:
+      variable:
+        source: LOCAL_STATE
+        defaultValue:
+          serializedValue: " "
+        baseVariable:
+          localState:
+            fieldIdentifier:
+              name: distanceTexts
+              key: dg424
+            stateVariableType: WIDGET_CLASS_STATE
+        nodeKeyRef:
+          key: Scaffold_sfbdifc3
+        uiBuilderValue:
+          serializedValue: distance
+    maxLinesValue:
+      inputValue: 2
+  expanded:
+    expandedType: EXPANDED
+  responsiveVisibility: {}
+  opacity:
+    opacityValue:
+      inputValue: 1
+    animatedOpacity: {}
+valueKey: {}

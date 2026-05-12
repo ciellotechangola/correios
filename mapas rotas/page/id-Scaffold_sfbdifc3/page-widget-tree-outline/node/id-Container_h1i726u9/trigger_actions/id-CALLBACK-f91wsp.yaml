@@ -1,0 +1,9 @@
+rootAction:
+  key: ar3vquom
+  action:
+    key: mskqae8g
+trigger:
+  triggerType: CALLBACK
+  parameterIdentifier:
+    name: onRouteDrawn
+    key: f91wsp

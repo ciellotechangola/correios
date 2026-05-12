@@ -1,0 +1,12 @@
+key: Column_q9m38qwb
+type: Column
+props:
+  column:
+    primary: true
+    listSpacing:
+      spacingValue:
+        inputValue: 8
+  expanded:
+    expandedType: EXPANDED
+    flexValue:
+      inputValue: 1

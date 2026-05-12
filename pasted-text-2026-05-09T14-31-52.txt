@@ -1,0 +1,230 @@
+CORRIGE O ERRO CRÍTICO NO FLUXO DO VENDEDOR — APP CORREIOS
+
+ERRO ATUAL:
+AppContext.tsx:504
+Erro ao carregar loja do vendedor:
+"JSON object requested, multiple (or no) rows returned"
+
+STACK:
+Supabase + React + TypeScript
+
+OBJETIVO:
+Resolver DEFINITIVAMENTE o erro de carregamento da loja do vendedor sem quebrar funcionalidades existentes.
+
+CAUSA PROVÁVEL:
+Está sendo usado:
+.single()
+
+Mas a query:
+- retorna 0 linhas
+OU
+- retorna múltiplas linhas
+
+O Supabase lança erro quando `.single()` não encontra exatamente 1 registro.
+
+==================================================
+O QUE IMPLEMENTAR
+==================================================
+
+1. IDENTIFICAR TODAS AS QUERIES DE LOJA DO VENDEDOR
+Procurar:
+- .single()
+- maybeSingle()
+- select('*')
+- queries em:
+  - AppContext.tsx
+  - dashboard vendedor
+  - login vendedor
+  - carregamento inicial
+  - auth listener
+
+==================================================
+2. SUBSTITUIR .single() INCORRETO
+==================================================
+
+SE O VENDEDOR PODE NÃO TER LOJA:
+USAR:
+.maybeSingle()
+
+EXEMPLO CORRETO:
+
+const { data, error } = await supabase
+  .from('lojas')
+  .select('*')
+  .eq('profile_id', user.id)
+  .maybeSingle();
+
+if (error) {
+  console.error('Erro ao carregar loja:', error);
+}
+
+if (!data) {
+  console.warn('Vendedor sem loja cadastrada');
+}
+
+==================================================
+3. SE EXISTIREM MÚLTIPLAS LOJAS
+==================================================
+
+NÃO CRASHAR A APP.
+
+IMPLEMENTAR:
+
+.order('created_at', { ascending: false })
+.limit(1)
+
+EXEMPLO:
+
+const { data, error } = await supabase
+  .from('lojas')
+  .select('*')
+  .eq('profile_id', user.id)
+  .order('created_at', { ascending: false })
+  .limit(1);
+
+const loja = data?.[0] || null;
+
+==================================================
+4. NÃO BLOQUEAR O DASHBOARD
+==================================================
+
+Atualmente:
+- "Carregando produtos..."
+- "Carregando pedidos..."
+- "Carregando dashboard..."
+
+fica infinito.
+
+IMPLEMENTAR:
+- loading timeout
+- finally()
+- fallback seguro
+
+EXEMPLO:
+
+try {
+   setLoading(true);
+
+   ...
+} catch (err) {
+   console.error(err);
+} finally {
+   setLoading(false);
+}
+
+==================================================
+5. PROTEGER TODOS OS ESTADOS
+==================================================
+
+ANTES DE ACESSAR:
+
+loja.id
+loja.nome
+loja.status
+
+VALIDAR:
+
+if (!loja) return;
+
+OU:
+
+loja?.id
+
+==================================================
+6. IMPLEMENTAR LOGS PROFISSIONAIS
+==================================================
+
+Adicionar logs claros:
+
+console.log('[VENDEDOR] carregando loja...');
+console.log('[VENDEDOR] loja encontrada:', loja);
+console.warn('[VENDEDOR] nenhuma loja encontrada');
+console.error('[VENDEDOR] erro ao carregar loja:', error);
+
+==================================================
+7. GARANTIR QUE O LOGIN NÃO QUEBRE
+==================================================
+
+Mesmo sem loja:
+- login deve funcionar
+- dashboard deve abrir
+- vendedor pode criar loja depois
+
+NÃO depender da loja para autenticação.
+
+==================================================
+8. VALIDAR BANCO SUPABASE
+==================================================
+
+Verificar:
+- tabela lojas
+- profile_id
+- duplicações
+
+Criar query SQL de diagnóstico:
+
+SELECT profile_id, COUNT(*)
+FROM lojas
+GROUP BY profile_id
+HAVING COUNT(*) > 1;
+
+Se houver múltiplas lojas:
+- tratar no frontend
+- NÃO assumir unicidade
+
+==================================================
+9. IMPLEMENTAR ESTADO ESTÁVEL
+==================================================
+
+Garantir:
+
+setLoja(null)
+setProdutos([])
+setPedidos([])
+
+quando não houver dados.
+
+NUNCA deixar estados undefined.
+
+==================================================
+10. RESULTADO ESPERADO
+==================================================
+
+Após correção:
+
+✅ login vendedor funciona
+✅ dashboard abre
+✅ loading infinito removido
+✅ sem crash em AppContext.tsx
+✅ vendedor sem loja não quebra sistema
+✅ múltiplas lojas não causam erro
+✅ carregamento resiliente
+✅ logs claros para debug
+
+==================================================
+REGRAS CRÍTICAS
+==================================================
+
+- NÃO quebrar funcionalidades existentes
+- NÃO remover realtime
+- NÃO alterar arquitetura
+- NÃO criar regressões
+- NÃO usar any
+- TypeScript tipado corretamente
+- Código limpo e resiliente
+- Tratar null/undefined corretamente
+- Usar async/await corretamente
+- Evitar re-render infinito
+- Evitar race conditions
+
+==================================================
+ENTREGAR:
+==================================================
+
+1. Código corrigido completo
+2. Explicação da causa real
+3. Melhorias implementadas
+4. Código final pronto para produção
+5. Correções de loading infinito
+6. Tratamento seguro de loja inexistente
+7. Refatoração limpa do fluxo vendedor

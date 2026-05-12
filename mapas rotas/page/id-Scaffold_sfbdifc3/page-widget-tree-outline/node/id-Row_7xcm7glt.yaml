@@ -1,0 +1,13 @@
+key: Row_7xcm7glt
+type: Row
+props:
+  row:
+    listSpacing:
+      spacingValue:
+        inputValue: 4
+  responsiveVisibility: {}
+  opacity:
+    opacityValue:
+      inputValue: 1
+    animatedOpacity: {}
+valueKey: {}

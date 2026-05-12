@@ -1,0 +1,15 @@
+key: AppBar_p63frkja
+type: AppBar
+props:
+  appBar:
+    templateType: LARGE_HEADER
+    titleInFlexibleSpaceBar: false
+    defaultBackButtonValue:
+      inputValue: false
+    backgroundColorValue:
+      inputValue:
+        themeColor: PRIMARY
+    elevationValue:
+      inputValue: 2
+    centerTitleValue:
+      inputValue: false

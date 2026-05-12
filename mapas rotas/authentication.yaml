@@ -1,0 +1,19 @@
+active: false
+firebase:
+  createUserDocument:
+    collectionIdentifier:
+      name: users
+      key: zx0vswv8
+    write:
+      updates: {}
+firebaseConfigFileInfos:
+  - androidPath: users/actN8s8R7FcuY1TUBrtlLss8ZQq1/projects/googe-maps-route-yivepc/configs/6r94w90s2omf/google-services.json
+    iosPath: users/actN8s8R7FcuY1TUBrtlLss8ZQq1/projects/googe-maps-route-yivepc/configs/l4236rqyx8je/GoogleService-Info.plist
+    webConfig: "\/\/ Copy and paste this into your JavaScript code to initialize the Firebase SDK.\n\/\/ You will also need to load the Firebase SDK.\n\/\/ See https:\/\/firebase.google.com\/docs\/web\/setup for more details.\n\nfirebase.initializeApp({\n  \"projectId\": \"googe-maps-route-yivepc\",\n  \"appId\": \"1:389933794947:web:68c7669cd081895753fdb6\",\n  \"storageBucket\": \"googe-maps-route-yivepc.firebasestorage.app\",\n  \"apiKey\": \"AIzaSyB4tUbS4DAtgVRB90pO_YEcIPWgfhJcMRg\",\n  \"authDomain\": \"googe-maps-route-yivepc.firebaseapp.com\",\n  \"messagingSenderId\": \"389933794947\"\n});\n"
+    androidPackageNames:
+      - com.drivird.drivird
+      - com.appycloud.googlemapsroute
+    iosBundleId: com.appycloud.googlemapsroute
+    environment:
+      name: Production
+      key: PROD

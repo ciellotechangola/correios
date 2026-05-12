@@ -1,0 +1,62 @@
+name: HomePage
+description: ""
+params: {}
+node:
+  key: Scaffold_sfbdifc3
+classModel:
+  stateFields:
+    - parameter:
+        identifier:
+          name: durationText
+          key: pz3vn
+        defaultValue:
+          serializedValue: ""
+        dataType:
+          scalarType: String
+          nonNullable: false
+      serializedDefaultValue:
+        - " "
+    - parameter:
+        identifier:
+          name: distanceText
+          key: dg424
+        defaultValue:
+          serializedValue: ""
+        dataType:
+          scalarType: String
+          nonNullable: false
+      serializedDefaultValue:
+        - " "
+    - parameter:
+        identifier:
+          name: showContainerRoute
+          key: h59rt
+        defaultValue:
+          serializedValue: "false"
+        dataType:
+          scalarType: Boolean
+          nonNullable: true
+      serializedDefaultValue:
+        - "false"
+    - parameter:
+        identifier:
+          name: avoidTolls
+          key: cqu2l
+        defaultValue:
+          serializedValue: "false"
+        dataType:
+          scalarType: Boolean
+          nonNullable: true
+      serializedDefaultValue:
+        - "false"
+    - parameter:
+        identifier:
+          name: staticDurationText
+          key: z0n0c
+        defaultValue:
+          serializedValue: ""
+        dataType:
+          scalarType: String
+          nonNullable: false
+      serializedDefaultValue:
+        - " "

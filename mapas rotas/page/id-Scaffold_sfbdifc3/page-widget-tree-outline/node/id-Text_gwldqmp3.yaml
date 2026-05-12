@@ -1,0 +1,39 @@
+key: Text_gwldqmp3
+type: Text
+props:
+  text:
+    themeStyle: BODY_MEDIUM
+    autoSize: true
+    legacyOverflowReplacement: ellipsis
+    translationIdentifier:
+      key: jesh2btl
+    selectable: true
+    textValue:
+      variable:
+        source: WIDGET_STATE
+        defaultValue:
+          serializedValue: " "
+        baseVariable:
+          widgetState:
+            returnParameter:
+              dataType:
+                scalarType: GooglePlace
+        operations:
+          - accessGooglePlaceField:
+              placeField: ADDRESS
+        nodeKeyRef:
+          key: PlacePicker_gvlmoe1h
+        uiBuilderValue:
+          serializedValue: origin
+    maxLinesValue:
+      inputValue: 3
+    legacyOverriddenTextMaxCharsValue:
+      inputValue: 50
+  expanded:
+    expandedType: EXPANDED
+  responsiveVisibility: {}
+  opacity:
+    opacityValue:
+      inputValue: 1
+    animatedOpacity: {}
+valueKey: {}

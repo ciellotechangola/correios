@@ -1,0 +1,93 @@
+key: PlacePicker_jh71yfsw
+type: PlacePicker
+props:
+  placePicker:
+    buttonOptions:
+      text:
+        themeStyle: TITLE_SMALL
+        translationIdentifier:
+          key: 6olw7884
+        textValue:
+          inputValue: Destination ?
+        colorValue:
+          inputValue:
+            themeColor: INFO
+      borderRadius:
+        type: FF_BORDER_RADIUS_ALL
+        allValue:
+          inputValue: 8
+          mostRecentInputValue: 8
+      dimensions:
+        width:
+          pixelsValue:
+            inputValue: 200
+        height:
+          pixelsValue:
+            inputValue: 40
+      elevationValue:
+        inputValue: 0
+        mostRecentInputValue: 0
+      fillColorValue:
+        inputValue:
+          themeColor: TERTIARY
+      borderColorValue:
+        inputValue:
+          value: "0"
+      borderWidthValue:
+        inputValue: 1
+      iconValue:
+        inputValue:
+          sizeValue:
+            inputValue: 16
+          colorValue:
+            inputValue:
+              themeColor: INFO
+          iconDataValue:
+            inputValue:
+              codePoint: 57998
+              family: MaterialIcons
+              matchTextDirection: false
+              name: flag
+  responsiveVisibility: {}
+  themeOverrides:
+    - tagPath:
+        - 45
+        - 1
+        - 36
+        - 1
+        - 7
+        - 1
+    - tagPath:
+        - 45
+        - 1
+        - 36
+        - 1
+        - 6
+        - 1
+    - tagPath:
+        - 45
+        - 1
+        - 26
+    - tagPath:
+        - 45
+        - 1
+        - 27
+    - tagPath:
+        - 45
+        - 1
+        - 1
+        - 26
+        - 1
+  opacity:
+    opacityValue:
+      inputValue: 1
+      mostRecentInputValue: 1
+    animatedOpacity: {}
+name: PlacePickerDestination
+parameterValues: {}
+themeWidgetInfo:
+  identifier:
+    name: PIcker
+    key: qond6d
+  widgetHash: 33172348
+valueKey: {}

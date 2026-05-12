@@ -1,0 +1,7 @@
+pubspecDependencies:
+  - name: flutter_polyline_points
+    version: ^2.1.0
+  - name: google_maps_flutter
+    version: 2.9.0
+  - name: google_routes_flutter
+    version: ^1.0.0+1

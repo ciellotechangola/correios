@@ -1,0 +1,39 @@
+key: Text_l148a0v2
+type: Text
+props:
+  text:
+    themeStyle: BODY_MEDIUM
+    autoSize: true
+    legacyOverflowReplacement: ellipsis
+    translationIdentifier:
+      key: 039s03vy
+    selectable: true
+    textValue:
+      variable:
+        source: WIDGET_STATE
+        defaultValue:
+          serializedValue: " "
+        baseVariable:
+          widgetState:
+            returnParameter:
+              dataType:
+                scalarType: GooglePlace
+        operations:
+          - accessGooglePlaceField:
+              placeField: ADDRESS
+        nodeKeyRef:
+          key: PlacePicker_jh71yfsw
+        uiBuilderValue:
+          serializedValue: destination
+    maxLinesValue:
+      inputValue: 3
+    legacyOverriddenTextMaxCharsValue:
+      inputValue: 50
+  expanded:
+    expandedType: EXPANDED
+  responsiveVisibility: {}
+  opacity:
+    opacityValue:
+      inputValue: 1
+    animatedOpacity: {}
+valueKey: {}

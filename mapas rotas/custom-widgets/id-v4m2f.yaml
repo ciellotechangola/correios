@@ -1,0 +1,110 @@
+identifier:
+  name: GoogleMapsRoute
+  key: v4m2f
+parameters:
+  - identifier:
+      name: dimensions
+      key: m10op6
+    dataType:
+      scalarType: WidgetProperty
+      nonNullable: true
+      subType:
+        widgetPropertyType: DIMENSIONS
+  - identifier:
+      name: origin
+      key: 71dvl1
+    dataType:
+      scalarType: LatLng
+      nonNullable: false
+  - identifier:
+      name: destination
+      key: 9nvisu
+    dataType:
+      scalarType: LatLng
+      nonNullable: false
+  - identifier:
+      name: googleApiKey
+      key: 917zbo
+    dataType:
+      scalarType: String
+      nonNullable: true
+  - identifier:
+      name: initialLocation
+      key: ddefs7
+    dataType:
+      scalarType: LatLng
+      nonNullable: false
+  - identifier:
+      name: onRouteDrawn
+      key: f91wsp
+    dataType:
+      scalarType: Action
+      nonNullable: true
+      nestedParams:
+        - identifier:
+            name: totalDistanceValue
+            key: 8o4i48
+          dataType:
+            scalarType: Integer
+            nonNullable: false
+        - identifier:
+            name: totalDurationValue
+            key: byiu8v
+          dataType:
+            scalarType: Integer
+            nonNullable: false
+        - identifier:
+            name: distanceText
+            key: hdrmyf
+          dataType:
+            scalarType: String
+            nonNullable: false
+        - identifier:
+            name: durationText
+            key: 7ktp2i
+          dataType:
+            scalarType: String
+            nonNullable: false
+        - identifier:
+            name: staticDurationText
+            key: s0v5q7
+          dataType:
+            scalarType: String
+            nonNullable: false
+  - identifier:
+      name: onError
+      key: 8cna0g
+    dataType:
+      scalarType: Action
+      nonNullable: true
+      nestedParams:
+        - identifier:
+            name: message
+            key: h9siir
+          dataType:
+            scalarType: String
+            nonNullable: false
+  - identifier:
+      name: onMapCreated
+      key: pcmfwm
+    dataType:
+      scalarType: Action
+      nonNullable: true
+  - identifier:
+      name: routeColor
+      key: gx8scs
+    dataType:
+      scalarType: Color
+      nonNullable: true
+  - identifier:
+      name: padding
+      key: cwomi3
+    dataType:
+      scalarType: Double
+      nonNullable: true
+  - identifier:
+      name: avoidTolls
+      key: tu613a
+    dataType:
+      scalarType: Boolean
+      nonNullable: true

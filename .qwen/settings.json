@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(echo *)",
+      "Bash(✅)",
+      "Bash(⚠️)"
+    ]
+  },
+  "$version": 3
+}

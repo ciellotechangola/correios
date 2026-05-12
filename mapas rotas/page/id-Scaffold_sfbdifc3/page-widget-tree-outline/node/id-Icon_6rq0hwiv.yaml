@@ -1,0 +1,21 @@
+key: Icon_6rq0hwiv
+type: Icon
+props:
+  icon:
+    sizeValue:
+      inputValue: 24
+    colorValue:
+      inputValue:
+        themeColor: ERROR
+    iconDataValue:
+      inputValue:
+        codePoint: 58284
+        family: MaterialIcons
+        matchTextDirection: false
+        name: location_pin
+  responsiveVisibility: {}
+  opacity:
+    opacityValue:
+      inputValue: 1
+    animatedOpacity: {}
+valueKey: {}

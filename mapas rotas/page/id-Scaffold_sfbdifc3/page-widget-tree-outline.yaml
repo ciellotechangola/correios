@@ -1,0 +1,60 @@
+node:
+  key: Scaffold_sfbdifc3
+  appBar:
+    key: AppBar_p63frkja
+    title:
+      key: Row_442nz6wy
+      children:
+        - key: Icon_5z32ciuo
+        - key: Text_tuia1df2
+  body:
+    key: Column_5igyjhs1
+    children:
+      - key: Stack_wknosxo7
+        children:
+          - key: Container_h1i726u9
+          - key: Container_yl7r05nh
+            children:
+              - key: Form_wpkvtt7f
+                children:
+                  - key: Column_u9itp5p5
+                    children:
+                      - key: PlacePicker_gvlmoe1h
+                      - key: PlacePicker_jh71yfsw
+                      - key: SwitchListTile_mf1el6p0
+      - key: Container_x0iudo1u
+        children:
+          - key: Column_yezcswtt
+            children:
+              - key: Row_g0usmhch
+                children:
+                  - key: Column_q9m38qwb
+                    children:
+                      - key: Row_7xcm7glt
+                        children:
+                          - key: Icon_6rq0hwiv
+                          - key: Text_gwldqmp3
+                  - key: Column_sjz85cbt
+                    children:
+                      - key: Row_qfv7b4f7
+                        children:
+                          - key: Icon_uq9u3942
+                          - key: Text_l148a0v2
+              - key: Row_28egoy5x
+                children:
+                  - key: Column_ztvdcjc0
+                    children:
+                      - key: Row_q63thl8z
+                        children:
+                          - key: Icon_3nq9gpe8
+                          - key: Text_9xpq7yyg
+                  - key: Column_n55fnd8a
+                    children:
+                      - key: Row_twz7gj4k
+                        children:
+                          - key: Icon_1tv5fqwm
+                          - key: Text_rbscdau6
+              - key: Row_3go4h0rw
+                children:
+                  - key: Icon_ax29k4mk
+                  - key: Text_5mtrjgaj

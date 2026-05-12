@@ -1,0 +1,39 @@
+key: Text_5mtrjgaj
+type: Text
+props:
+  text:
+    themeStyle: BODY_MEDIUM
+    autoSize: true
+    translationIdentifier:
+      key: 6q3lvlat
+    selectable: false
+    textValue:
+      variable:
+        source: FUNCTION_CALL
+        functionCall:
+          stringInterpolation: {}
+          values:
+            - inputValue:
+                serializedValue: "Regardless of traffic conditions: "
+            - variable:
+                source: LOCAL_STATE
+                baseVariable:
+                  localState:
+                    fieldIdentifier:
+                      name: staticDurationText
+                      key: z0n0c
+                    stateVariableType: WIDGET_CLASS_STATE
+                nodeKeyRef:
+                  key: Scaffold_sfbdifc3
+                uiBuilderValue:
+                  serializedValue: duration
+    maxLinesValue:
+      inputValue: 2
+  expanded:
+    expandedType: EXPANDED
+  responsiveVisibility: {}
+  opacity:
+    opacityValue:
+      inputValue: 1
+    animatedOpacity: {}
+valueKey: {}

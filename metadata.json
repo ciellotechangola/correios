@@ -1,0 +1,7 @@
+{
+  "name": "Correios de Luanda - Auto Parts 4",
+  "description": "A comprehensive marketplace for auto parts in Luanda, featuring map-based discovery, chat negotiation, and delivery integration.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}

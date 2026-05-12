@@ -1,0 +1,12 @@
+key: Column_ztvdcjc0
+type: Column
+props:
+  column:
+    primary: true
+    listSpacing:
+      spacingValue:
+        inputValue: 8
+  expanded:
+    expandedType: EXPANDED
+    flexValue:
+      inputValue: 1

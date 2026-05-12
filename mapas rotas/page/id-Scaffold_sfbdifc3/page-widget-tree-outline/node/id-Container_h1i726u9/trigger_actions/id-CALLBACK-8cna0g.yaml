@@ -1,0 +1,9 @@
+rootAction:
+  key: gelccptp
+  action:
+    key: xfz4ffyv
+trigger:
+  triggerType: CALLBACK
+  parameterIdentifier:
+    name: onError
+    key: 8cna0g

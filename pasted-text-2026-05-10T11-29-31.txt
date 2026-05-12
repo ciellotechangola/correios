@@ -1,0 +1,258 @@
+# IMPLEMENTAÇÃO SEGURA — CORREÇÃO DO MAPA DE LOJAS no perfil cliente (SEM QUEBRAR INFRAESTRUTURA)
+
+Atue como um engenheiro de software sênior especialista em arquitetura full-stack, geolocalização em tempo real, mapas, Supabase/PostGIS e aplicações React/React Native.
+
+# CONTEXTO DO PROJETO
+
+O projeto já possui infraestrutura COMPLETA e FUNCIONAL:
+
+* Frontend implementado
+* Backend implementado
+* Supabase configurado
+* Banco PostgreSQL/PostGIS configurado
+* Sistema de mapas real já existente
+* Sistema de rotas já existente
+* Sistema de perfil de lojas já existente
+* Sistema realtime já existente
+* Estrutura visual já existente
+* Fluxo de navegação já existente
+
+CAMINHO DO PROJETO:
+
+C:\Users\LEGION GAMER.minimax-agent\projects\pocket\correios\correios
+
+# REGRA PRINCIPAL
+
+MANTER 100% DA INFRAESTRUTURA EXISTENTE.
+
+NÃO recriar arquitetura.
+NÃO alterar estrutura de pastas.
+NÃO refatorar código sem necessidade.
+NÃO trocar bibliotecas existentes.
+NÃO mudar padrões do projeto.
+NÃO criar novo sistema de mapas.
+NÃO alterar APIs atuais.
+NÃO alterar banco sem extrema necessidade.
+NÃO quebrar compatibilidade.
+
+Apenas corrigir os problemas solicitados usando a estrutura atual já existente.
+
+# OBJETIVO DA IMPLEMENTAÇÃO
+
+Corrigir o sistema "Mapa de Lojas" que atualmente apresenta inconsistências.
+
+# PROBLEMAS IDENTIFICADOS
+
+## 1. MAPA MOSTRA MENOS LOJAS
+
+Atualmente existem 6 lojas cadastradas no banco.
+
+Porém apenas 2 aparecem no mapa.
+
+Isso indica possível problema em:
+
+* filtro incorreto
+* query incompleta
+* problema de latitude/longitude
+* problema de renderização
+* problema no realtime
+* problema no carregamento dos markers
+* problema no parse de coordenadas
+* problema de status/visibilidade
+
+A implementação DEVE:
+
+* carregar TODAS as lojas válidas
+* renderizar TODAS no mapa
+* garantir atualização realtime
+* validar coordenadas antes da renderização
+* evitar quebra caso uma loja esteja sem coordenada
+
+## 2. LOJA MAIS PRÓXIMA NÃO ESTÁ CALCULANDO
+
+Atualmente aparece:
+
+Alexandre • 0.0km
+
+Mesmo quando o usuário está distante.
+
+Isso significa que:
+
+* cálculo de distância não está funcionando
+  OU
+* coordenadas do cliente não estão sendo usadas
+  OU
+* latitude/longitude estão invertidas
+  OU
+* cálculo sempre retorna zero
+  OU
+* fallback incorreto está sobrescrevendo resultado
+
+A implementação DEVE:
+
+* obter localização REAL do usuário
+* usar coordenadas REAIS da loja
+* calcular distância REAL
+* atualizar automaticamente
+* mostrar distância correta em KM
+* usar fórmula já existente no projeto
+* NÃO criar lógica paralela se já existir helper utilitário
+
+## 3. CLICK EM "LOJA MAIS PRÓXIMA"
+
+Ao clicar na loja mais próxima:
+
+DEVE abrir exatamente o mesmo comportamento já existente em:
+
+Loja Perfil → botão "Rota"
+
+Com:
+
+* mapa real já existente
+* traçado real da rota
+* navegação já existente
+* mesmo design
+* mesma UX
+* mesmo componente já utilizado
+* mesma lógica já existente
+
+NÃO criar nova tela de rota.
+
+REUTILIZAR a infraestrutura atual.
+
+## 4. CLICK NO BOTÃO "ROTA"
+
+Na tela:
+
+Loja Perfil
+
+Alexandre
+Auto Parts Specialist
+4.5(0 reviews)
+
+Estrada de Fritz, Talatona, Luanda...
+
+Ao clicar em:
+
+"Rota"
+
+DEVE:
+
+* traçar rota real corretamente
+* usar origem = localização atual do usuário
+* usar destino = coordenada da loja
+* abrir mapa real existente
+* manter comportamento já implementado no sistema
+
+# REGRAS TÉCNICAS OBRIGATÓRIAS
+
+## PRESERVAÇÃO TOTAL
+
+NÃO alterar:
+
+* estrutura global
+* providers
+* contexto global
+* auth
+* realtime existente
+* componentes reutilizáveis
+* hooks globais
+* schema do banco
+* contratos de API
+
+## IMPLEMENTAÇÃO SEGURA
+
+Antes de alterar:
+
+* localizar componentes já existentes de rota
+* reutilizar lógica existente
+* reutilizar hooks existentes
+* reutilizar serviços existentes
+* reutilizar funções existentes
+
+## MAPA
+
+Garantir:
+
+* markers visíveis
+* renderização estável
+* atualização correta
+* centralização funcional
+* zoom funcional
+* performance mantida
+
+## DISTÂNCIA
+
+Garantir:
+
+* cálculo real em KM
+* arredondamento correto
+* fallback seguro
+* não mostrar 0.0km incorretamente
+
+# VALIDAÇÕES OBRIGATÓRIAS
+
+Validar:
+
+* loja sem coordenada
+* cliente sem permissão GPS
+* GPS desligado
+* latitude inválida
+* longitude inválida
+* lista vazia
+* realtime desconectado
+
+# O QUE FAZER
+
+1. Identificar exatamente porque apenas 2 lojas aparecem
+2. Corrigir carregamento das 6 lojas
+3. Corrigir cálculo da loja mais próxima
+4. Corrigir cálculo de distância
+5. Integrar clique da loja mais próxima ao sistema REAL de rota já existente
+6. Garantir que botão "Rota" use mesma infraestrutura
+7. Garantir que tudo continue funcionando sem regressões
+
+# FORMATO DA RESPOSTA
+
+Responder EXATAMENTE neste formato:
+
+## Diagnóstico encontrado
+
+Explicar causa real dos problemas.
+
+## Arquivos afetados
+
+Listar SOMENTE arquivos alterados.
+
+## Antes → Depois
+
+Mostrar apenas trechos modificados.
+
+## Justificativa técnica
+
+Explicar por que a abordagem preserva a arquitetura.
+
+## Riscos
+
+Explicar possíveis impactos.
+
+## Checklist de validação
+
+* [ ] Todas as 6 lojas aparecem
+* [ ] Distância calculada corretamente
+* [ ] Loja mais próxima funcional
+* [ ] Botão rota funcional
+* [ ] Realtime funcional
+* [ ] Sem regressões
+* [ ] Infraestrutura preservada
+
+# IMPORTANTE
+
+NÃO inventar nova arquitetura.
+NÃO simplificar comportamento existente.
+NÃO remover funcionalidades.
+NÃO criar código paralelo desnecessário.
+NÃO alterar design existente.
+NÃO alterar fluxo existente.
+
+A solução deve parecer uma continuação natural da infraestrutura já implementada.

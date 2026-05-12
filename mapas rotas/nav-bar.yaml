@@ -1,0 +1,7 @@
+show: false
+backgroundColor:
+  themeColor: PRIMARY_BACKGROUND
+selectedIconColor:
+  themeColor: PRIMARY
+unselectedIconColor:
+  themeColor: SECONDARY_TEXT

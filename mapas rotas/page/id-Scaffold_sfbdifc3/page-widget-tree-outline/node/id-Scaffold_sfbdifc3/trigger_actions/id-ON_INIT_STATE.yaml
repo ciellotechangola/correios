@@ -1,0 +1,32 @@
+rootAction:
+  key: 2l2mpexp
+  conditionActions:
+    falseAction:
+      key: bt5yvhj3
+      action:
+        key: obez064l
+    trueActions:
+      - condition:
+          variable:
+            source: FUNCTION_CALL
+            functionCall:
+              values:
+                - variable:
+                    source: LOCAL_STATE
+                    baseVariable:
+                      localState:
+                        fieldIdentifier:
+                          name: googleApiKey
+                          key: icdu1gj3
+                        stateVariableType: APP_STATE
+                - {}
+              condition:
+                relation: DOES_NOT_EXIST_OR_IS_EMPTY
+        trueAction:
+          key: nu3z7qxn
+          action:
+            key: l09pzg5v
+    hasMultiConditions: false
+    key: wxick57a
+trigger:
+  triggerType: ON_INIT_STATE

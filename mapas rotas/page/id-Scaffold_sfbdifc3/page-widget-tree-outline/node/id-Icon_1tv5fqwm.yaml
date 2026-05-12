@@ -1,0 +1,15 @@
+key: Icon_1tv5fqwm
+type: Icon
+props:
+  icon:
+    sizeValue:
+      inputValue: 24
+    colorValue:
+      inputValue:
+        themeColor: PRIMARY_TEXT
+    iconDataValue:
+      inputValue:
+        codePoint: 57402
+        family: MaterialIcons
+        matchTextDirection: false
+        name: access_time
